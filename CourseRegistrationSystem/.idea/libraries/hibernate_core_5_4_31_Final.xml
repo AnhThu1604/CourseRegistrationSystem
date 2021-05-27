@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="hibernate-core-5.4.31.Final">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/hibernate-core-5.4.31.Final.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/mysql-connector-java-8.0.22.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
