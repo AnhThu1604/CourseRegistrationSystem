@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="pojo.HocphanEntity" table="hocphan" schema="CourseRegistrationSystem">
+        <id name="maHocPhan">
+            <column name="MaHocPhan" sql-type="varchar(30)" length="30"/>
+        </id>
+        <property name="tenMonHoc">
+            <column name="TenMonHoc" sql-type="varchar(50)" length="50" not-null="true"/>
+        </property>
+        <property name="soTinChi">
+            <column name="SoTinChi" sql-type="int" not-null="true"/>
+        </property>
+        <property name="giaoVien">
+            <column name="GiaoVien" sql-type="varchar(50)" length="50" not-null="true"/>
+        </property>
+        <property name="tenPhongHoc">
+            <column name="TenPhongHoc" sql-type="varchar(50)" length="50" not-null="true"/>
+        </property>
+        <property name="ngayHoc">
+            <column name="NgayHoc" sql-type="int" not-null="true"/>
+        </property>
+        <property name="caHoc">
+            <column name="CaHoc" sql-type="int" not-null="true"/>
+        </property>
+        <property name="slotToiDa">
+            <column name="SlotToiDa" sql-type="int" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

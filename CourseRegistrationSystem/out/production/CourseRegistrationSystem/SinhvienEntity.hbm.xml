@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="pojo.SinhvienEntity" table="sinhvien" schema="CourseRegistrationSystem">
+        <id name="maSinhVien">
+            <column name="MaSinhVien" sql-type="varchar(10)" length="10"/>
+        </id>
+        <property name="hoVaTen">
+            <column name="HoVaTen" sql-type="varchar(50)" length="50" not-null="true"/>
+        </property>
+        <property name="ngaySinh">
+            <column name="NgaySinh" sql-type="date" not-null="true"/>
+        </property>
+        <property name="phai">
+            <column name="Phai" sql-type="varchar(5)" length="5" not-null="true"/>
+        </property>
+        <property name="diaChi">
+            <column name="DiaChi" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="cmnd">
+            <column name="CMND" sql-type="varchar(12)" length="12" not-null="true"/>
+        </property>
+        <property name="lop">
+            <column name="Lop" sql-type="varchar(10)" length="10" not-null="true"/>
+        </property>
+        <property name="matKhau">
+            <column name="MatKhau" sql-type="varchar(50)" length="50" not-null="true"/>
+        </property>
+        <property name="email">
+            <column name="Email" sql-type="varchar(50)" length="50" not-null="true"/>
+        </property>
+        <property name="maQuyenDn">
+            <column name="MaQuyenDN" sql-type="int"/>
+        </property>
+    </class>
+</hibernate-mapping>
