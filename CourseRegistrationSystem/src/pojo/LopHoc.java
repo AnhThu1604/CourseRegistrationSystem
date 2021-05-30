@@ -4,7 +4,6 @@ public class LopHoc {
     private String maLopHoc;
     private int tongSVNam;
     private int tongSVNu;
-
     public LopHoc(){
 
     }

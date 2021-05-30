@@ -8,9 +8,11 @@ public class SinhVien implements java.io.Serializable{
     private String phai;
     private Date ngaySinh;
     private String diaChi;
-
-    private String lopDST;
-    private int maNguoiDung;
+    private String CMND;
+    private String lop;
+    private String matKhau;
+    private String email;
+    private int maQuyenDN;
 
     public SinhVien() {
     }
@@ -19,14 +21,17 @@ public class SinhVien implements java.io.Serializable{
         this.maSinhVien = maSinhVien;
     }
 
-    public SinhVien(String maSinhVien, String hoVaTen, String phai, Date ngaySinh, String diaChi, String lopDST, int maNguoiDung){
+    public SinhVien(String maSinhVien, String hoVaTen, String phai, Date ngaySinh,
+                    String diaChi, String CMND, String lop, String matKhau, String email){
         this.maSinhVien = maSinhVien;
         this.hoVaTen = hoVaTen;
         this.phai = phai;
         this.ngaySinh = ngaySinh;
         this.diaChi = diaChi;
-        this.lopDST = lopDST;
-        this.maNguoiDung= maNguoiDung;
+        this.lop = lop;
+        this.CMND = CMND;
+        this.matKhau = matKhau;
+        this.email = email;
     }
 
     public String getMaSinhVien() {
@@ -69,20 +74,43 @@ public class SinhVien implements java.io.Serializable{
         this.diaChi = diaChi;
     }
 
-    public String getLopDST() {
-        return lopDST;
+    public String getCMND() {
+        return CMND;
     }
 
-    public void setLopDST(String lopDST) {
-        this.lopDST = lopDST;
+    public void setCMND(String CMND) {
+        this.CMND = CMND;
     }
 
-    public int getMaNguoiDung() {
-        return maNguoiDung;
+    public String getLop() {
+        return lop;
     }
 
-    public void setMaNguoiDung(int maNguoiDung) {
-        this.maNguoiDung = maNguoiDung;
+    public void setLop(String lop) {
+        this.lop = lop;
     }
 
+    public String getMatKhau() {
+        return matKhau;
+    }
+
+    public void setMatKhau(String matKhau) {
+        this.matKhau = matKhau;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getMaQuyenDN() {
+        return maQuyenDN;
+    }
+
+    public void setMaQuyenDN(int maQuyenDN) {
+        this.maQuyenDN = maQuyenDN;
+    }
 }
