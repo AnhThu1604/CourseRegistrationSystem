@@ -1,6 +1,6 @@
 package pojo;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Objects;
 
 public class SinhvienEntity {
@@ -14,6 +14,27 @@ public class SinhvienEntity {
     private String matKhau;
     private String email;
     private int maQuyenDn;
+
+    public SinhvienEntity(){
+
+    }
+
+    public SinhvienEntity(String maSinhVien){
+        this.maSinhVien = maSinhVien;
+    }
+
+    public SinhvienEntity(String maSinhVien, String hoVaTen, String phai, Date ngaySinh, String diaChi,
+                        String cmnd, String lop, String matKhau, String email){
+        this.maSinhVien = maSinhVien;
+        this.hoVaTen = hoVaTen;
+        this.phai = phai;
+        this.ngaySinh = ngaySinh;
+        this.diaChi = diaChi;
+        this.cmnd = cmnd;
+        this.lop = lop;
+        this.matKhau = matKhau;
+        this.email = email;
+    }
 
     public String getMaSinhVien() {
         return maSinhVien;

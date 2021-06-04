@@ -10,7 +10,7 @@
         <property name="connection.password">anhthu2410</property>
 
         <property name="hibernate.ejb.metamodel.population">disabled</property>
-        
+
         <mapping resource="DangkiHpEntity.hbm.xml"/>
         <mapping resource="GiaovuEntity.hbm.xml"/>
         <mapping resource="HockiEntity.hbm.xml"/>
@@ -19,8 +19,6 @@
         <mapping resource="MonhocEntity.hbm.xml"/>
         <mapping resource="PhieuDkEntity.hbm.xml"/>
         <mapping resource="SinhvienEntity.hbm.xml"/>
-        <!-- <property name="connection.username"/> -->
-        <!-- <property name="connection.password"/> -->
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->

@@ -7,6 +7,20 @@ public class MonhocEntity {
     private String tenMonHoc;
     private Integer soTinChi;
 
+    public MonhocEntity(){
+
+    }
+
+    public MonhocEntity(String maMonHoc){
+        this.maMonHoc = maMonHoc;
+    }
+
+    public MonhocEntity(String maMonHoc, String tenMonHoc, Integer soTinChi){
+        this.maMonHoc = maMonHoc;
+        this.tenMonHoc = tenMonHoc;
+        this. soTinChi = soTinChi;
+    }
+
     public String getMaMonHoc() {
         return maMonHoc;
     }

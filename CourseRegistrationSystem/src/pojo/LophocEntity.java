@@ -8,6 +8,21 @@ public class LophocEntity {
     private Integer tongSvNam;
     private Integer tongSvNu;
 
+    public LophocEntity(){
+
+    }
+
+    public LophocEntity(String maLopHoc){
+        this.maLopHoc = maLopHoc;
+    }
+
+    public LophocEntity(String maLopHoc, Integer tongSv, Integer tongSvNam, Integer tongSvNu){
+        this.maLopHoc = maLopHoc;
+        this.tongSv = tongSv;
+        this.tongSvNam = tongSvNam;
+        this.tongSvNu = tongSvNu;
+    }
+
     public String getMaLopHoc() {
         return maLopHoc;
     }

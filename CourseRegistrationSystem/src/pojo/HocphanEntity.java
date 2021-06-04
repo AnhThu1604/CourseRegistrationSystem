@@ -12,6 +12,25 @@ public class HocphanEntity {
     private Integer caHoc;
     private Integer slotToiDa;
 
+    public HocphanEntity(){
+
+    }
+    public HocphanEntity(String maHocPhan){
+        this.maHocPhan = maHocPhan;
+    }
+
+    public HocphanEntity(String maHocPhan, String tenMonHoc, Integer soTinChi, String giaoVien,
+                         String tenPhongHoc, Integer ngayHoc, Integer caHoc, Integer slotToiDa){
+        this.maHocPhan = maHocPhan;
+        this.tenMonHoc = tenMonHoc;
+        this.soTinChi = soTinChi;
+        this.giaoVien = giaoVien;
+        this.tenPhongHoc = tenPhongHoc;
+        this.ngayHoc = ngayHoc;
+        this.caHoc = caHoc;
+        this.slotToiDa = slotToiDa;
+    }
+
     public String getMaHocPhan() {
         return maHocPhan;
     }

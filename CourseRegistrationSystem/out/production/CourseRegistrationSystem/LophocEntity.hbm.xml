@@ -9,13 +9,13 @@
             <column name="MaLopHoc" sql-type="varchar(30)" length="30"/>
         </id>
         <property name="tongSv">
-            <column name="TongSV" sql-type="int" not-null="true"/>
+            <column name="TongSV" sql-type="int" />
         </property>
         <property name="tongSvNam">
-            <column name="TongSVNam" sql-type="int" not-null="true"/>
+            <column name="TongSVNam" sql-type="int" />
         </property>
         <property name="tongSvNu">
-            <column name="TongSVNu" sql-type="int" not-null="true"/>
+            <column name="TongSVNu" sql-type="int" />
         </property>
     </class>
 </hibernate-mapping>

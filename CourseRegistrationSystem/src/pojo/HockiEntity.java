@@ -1,14 +1,29 @@
 package pojo;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 public class HockiEntity {
     private int maHocKi;
     private String tenHocKi;
-    private Timestamp namHoc;
-    private Timestamp ngayBatDau;
-    private Timestamp ngayKetThuc;
+    private Date namHoc;
+    private Date ngayBatDau;
+    private Date ngayKetThuc;
+
+    public HockiEntity(){
+
+    }
+
+    public HockiEntity(int maHocKi){
+        this.maHocKi = maHocKi;
+    }
+
+    public HockiEntity(int maHocKi, String tenHocKi, Date ngayBatDau, Date ngayKetThuc){
+        this.maHocKi = maHocKi;
+        this.tenHocKi = tenHocKi;
+        this.ngayBatDau = ngayBatDau;
+        this.ngayKetThuc = ngayKetThuc;
+    }
 
     public int getMaHocKi() {
         return maHocKi;
@@ -26,27 +41,27 @@ public class HockiEntity {
         this.tenHocKi = tenHocKi;
     }
 
-    public Timestamp getNamHoc() {
+    public Date getNamHoc() {
         return namHoc;
     }
 
-    public void setNamHoc(Timestamp namHoc) {
+    public void setNamHoc(Date namHoc) {
         this.namHoc = namHoc;
     }
 
-    public Timestamp getNgayBatDau() {
+    public Date getNgayBatDau() {
         return ngayBatDau;
     }
 
-    public void setNgayBatDau(Timestamp ngayBatDau) {
+    public void setNgayBatDau(Date ngayBatDau) {
         this.ngayBatDau = ngayBatDau;
     }
 
-    public Timestamp getNgayKetThuc() {
+    public Date getNgayKetThuc() {
         return ngayKetThuc;
     }
 
-    public void setNgayKetThuc(Timestamp ngayKetThuc) {
+    public void setNgayKetThuc(Date ngayKetThuc) {
         this.ngayKetThuc = ngayKetThuc;
     }
 

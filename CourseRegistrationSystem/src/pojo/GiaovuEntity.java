@@ -1,18 +1,38 @@
 package pojo;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 public class GiaovuEntity {
     private String ma;
     private String hoVaTen;
     private String phai;
-    private Timestamp ngaySinh;
+    private Date ngaySinh;
     private String diaChi;
     private String cmnd;
     private String matKhau;
     private String email;
     private int maQuyenDn;
+
+    public GiaovuEntity(){
+
+    }
+
+    public GiaovuEntity(String ma){
+        this.ma = ma;
+    }
+
+    public GiaovuEntity(String ma, String hoVaTen, String phai, Date ngaySinh, String diaChi,
+                        String cmnd, String matKhau, String email){
+        this.ma = ma;
+        this.hoVaTen = hoVaTen;
+        this.phai = phai;
+        this.ngaySinh = ngaySinh;
+        this.diaChi = diaChi;
+        this.cmnd = cmnd;
+        this.matKhau = matKhau;
+        this.email = email;
+    }
 
     public String getMa() {
         return ma;
@@ -38,11 +58,11 @@ public class GiaovuEntity {
         this.phai = phai;
     }
 
-    public Timestamp getNgaySinh() {
+    public Date getNgaySinh() {
         return ngaySinh;
     }
 
-    public void setNgaySinh(Timestamp ngaySinh) {
+    public void setNgaySinh(Date ngaySinh) {
         this.ngaySinh = ngaySinh;
     }
 

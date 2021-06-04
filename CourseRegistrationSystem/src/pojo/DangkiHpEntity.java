@@ -1,12 +1,27 @@
 package pojo;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 public class DangkiHpEntity {
     private int maDkhp;
-    private Timestamp ngayBatDau;
-    private Timestamp ngayKetThuc;
+    private Date ngayBatDau;
+    private Date ngayKetThuc;
+
+    public DangkiHpEntity(){
+
+    }
+
+    public DangkiHpEntity(int maDkhp){
+        this.maDkhp = maDkhp;
+    }
+
+    public DangkiHpEntity(int maDkhp, Date ngayBatDau, Date ngayKetThuc)
+    {
+        this.maDkhp = maDkhp;
+        this.ngayBatDau = ngayBatDau;
+        this.ngayKetThuc = ngayKetThuc;
+    }
 
     public int getMaDkhp() {
         return maDkhp;
@@ -16,21 +31,22 @@ public class DangkiHpEntity {
         this.maDkhp = maDkhp;
     }
 
-    public Timestamp getNgayBatDau() {
+    public Date getNgayBatDau() {
         return ngayBatDau;
     }
 
-    public void setNgayBatDau(Timestamp ngayBatDau) {
+    public void setNgayBatDau(Date ngayBatDau) {
         this.ngayBatDau = ngayBatDau;
     }
 
-    public Timestamp getNgayKetThuc() {
+    public Date getNgayKetThuc() {
         return ngayKetThuc;
     }
 
-    public void setNgayKetThuc(Timestamp ngayKetThuc) {
+    public void setNgayKetThuc(Date ngayKetThuc) {
         this.ngayKetThuc = ngayKetThuc;
     }
+
 
     @Override
     public boolean equals(Object o) {

@@ -6,6 +6,19 @@ public class PhieuDkEntity {
     private String maSv;
     private String maHocPhan;
 
+    public PhieuDkEntity(){
+
+    }
+
+    public PhieuDkEntity(String maSv){
+        this.maSv = maSv;
+    }
+
+    public PhieuDkEntity(String maSv, String maHocPhan){
+        this.maSv = maSv;
+        this.maHocPhan = maHocPhan;
+    }
+
     public String getMaSv() {
         return maSv;
     }
