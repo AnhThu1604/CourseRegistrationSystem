@@ -102,4 +102,16 @@ public class GiaoVuDAO {
         }
         return 1;
     }
+
+    public static GiaovuEntity xacThucTK (String ma, String mk){
+        GiaovuEntity giaoVu = getThongTinGV(ma);
+        if(giaoVu == null || giaoVu.getMatKhau() == null)
+        {
+            return null;
+        }
+        if(giaoVu.getMatKhau().equals(mk) == true){
+            return giaoVu;
+        }
+        return null;
+    }
 }

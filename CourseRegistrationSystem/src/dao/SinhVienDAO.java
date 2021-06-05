@@ -4,6 +4,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import pojo.GiaovuEntity;
 import pojo.SinhvienEntity;
 import util.HibernateUtil;
 
@@ -101,5 +102,17 @@ public class SinhVienDAO {
             session.close();
         }
         return 1;
+    }
+
+    public static SinhvienEntity xacThucTK (String ma, String mk){
+        SinhvienEntity sinhVien = getThongTinSV(ma);
+        if(sinhVien == null || sinhVien.getMatKhau() == null)
+        {
+            return null;
+        }
+        if(sinhVien.getMatKhau().equals(mk)== true){
+            return sinhVien;
+        }
+        return null;
     }
 }

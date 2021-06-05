@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import pojo.LophocEntity;
+import pojo.MonhocEntity;
 import pojo.SinhvienEntity;
 import util.HibernateUtil;
 
@@ -29,6 +30,7 @@ public class LopHocDAO {
 
         return ds;
     }
+
 
     public static LophocEntity getThongTinLH(String maLopHoc){
         LophocEntity lh = null;
