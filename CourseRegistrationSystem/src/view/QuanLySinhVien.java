@@ -10,6 +10,7 @@ import dao.SinhVienDAO;
 import pojo.LophocEntity;
 import pojo.SinhvienEntity;
 
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -39,8 +40,8 @@ public class QuanLySinhVien extends javax.swing.JPanel {
         while (list.hasNext()) {
             SinhvienEntity sinhVien = list.next();
             dtm.addRow(new Object[]{sinhVien.getMaSinhVien(), sinhVien.getHoVaTen(), sinhVien.getNgaySinh(), sinhVien.getDiaChi()});
-        jTable2.setModel(dtm);
         }
+        jTable2.setModel(dtm);
 
         txtMa.setText("");
         txtTen.setText("");
@@ -54,7 +55,7 @@ public class QuanLySinhVien extends javax.swing.JPanel {
 
     private void loadClass(){
         List<LophocEntity> ds = LopHocDAO.getDanhSachLH();
-        for(int i=0; i<ds.size(); i++){
+        for(int i=1; i<ds.size(); i++){
             box.addItem(ds.get(i).getMaLopHoc());
         }
 
@@ -454,10 +455,12 @@ public class QuanLySinhVien extends javax.swing.JPanel {
                 setData(sinhVien);
                 return;
             }
-
         }
-        if(sinhVien == null)
-        {
+        if(sinhVien == null) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Khong tìm thấy giáo vụ có mã "+ jTextFieldSearch.getText());
+            JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
+                    JOptionPane.ERROR_MESSAGE);
             loadDanhSach();
         }
     }
@@ -471,13 +474,23 @@ public class QuanLySinhVien extends javax.swing.JPanel {
     }
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) throws ParseException {
-        SinhvienEntity sinhVien = new SinhvienEntity(txtMa.getText());
-
-        getData(sinhVien);
-        int kq = SinhVienDAO.addSV(sinhVien);
-        if (kq == 1) {
-            LophocEntity lopHoc = LopHocDAO.getThongTinLH(box.getItemAt(box.getSelectedIndex()));
-            LopHocDAO.ThemSV(lopHoc, box1.getItemAt(box1.getSelectedIndex()));
+        StringBuilder sb = new StringBuilder();
+        sb.append("Thêm không thành công");
+        if(txtMa.getText().compareTo("") != 0) {
+            SinhvienEntity sinhVien = new SinhvienEntity(txtMa.getText());
+            getData(sinhVien);
+            int kq = SinhVienDAO.addSV(sinhVien);
+            if (kq == 1) {
+                LophocEntity lopHoc = LopHocDAO.getThongTinLH(box.getItemAt(box.getSelectedIndex()));
+                LopHocDAO.ThemSV(lopHoc, box1.getItemAt(box1.getSelectedIndex()));
+            }else {
+                JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
+                    JOptionPane.ERROR_MESSAGE);
         }
         loadDanhSach();
 
@@ -485,25 +498,38 @@ public class QuanLySinhVien extends javax.swing.JPanel {
     }
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) throws ParseException {
+        StringBuilder sb = new StringBuilder();
         SinhvienEntity sinhVien = SinhVienDAO.getThongTinSV(txtMa.getText());
+        if(sinhVien!=null){
+            sb.append("Cập nhật thông tin không thành công");
         getData(sinhVien);
         int kq = SinhVienDAO.updateThongTinSV(sinhVien);
         if (kq == 1) {
             LophocEntity lopHoc = LopHocDAO.getThongTinLH(box.getItemAt(box.getSelectedIndex()));
             LopHocDAO.SuaSV(lopHoc, box1.getItemAt(box1.getSelectedIndex()));
         }
+        else{
+            JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
+                    JOptionPane.ERROR_MESSAGE);
+        }}
+        else{
+            sb.append("Sinh viên không tồn tại trong danh sách nên không thực hiện chỉnh sửa thông tin.");
+        }
         loadDanhSach();
 
-        if (kq == 1){
-
-        }
     }
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {
         int kq = SinhVienDAO.deleteSV(txtMa.getText());
+        StringBuilder sb = new StringBuilder();
+        sb.append("Xoá sinh viên không thành công");
         if(kq == 1){
             LophocEntity lopHoc = LopHocDAO.getThongTinLH(box.getItemAt(box.getSelectedIndex()));
             LopHocDAO.XoaSV(lopHoc, box1.getItemAt(box1.getSelectedIndex()));
+        }
+        else{
+            JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
+                    JOptionPane.ERROR_MESSAGE);
         }
         loadDanhSach();
 

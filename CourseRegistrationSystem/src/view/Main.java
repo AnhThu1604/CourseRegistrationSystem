@@ -14,6 +14,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
+        LopHocDAO.deleteLH("18CTT4");
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override

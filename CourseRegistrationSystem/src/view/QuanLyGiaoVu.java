@@ -394,6 +394,10 @@ public class QuanLyGiaoVu extends javax.swing.JPanel {
         GiaovuEntity giaoVu= GiaoVuDAO.getThongTinGV(jTextFieldSearch.getText());
         if(giaoVu == null)
         {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Khong tìm thấy giáo vụ có mã "+ jTextFieldSearch.getText());
+            JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
+                JOptionPane.ERROR_MESSAGE);
             loadDanhSach();
         }else{
             setData(giaoVu);
@@ -413,11 +417,24 @@ public class QuanLyGiaoVu extends javax.swing.JPanel {
     }
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) throws ParseException {
-        GiaovuEntity giaoVu = new GiaovuEntity(txtMa.getText());
-
-        getData(giaoVu);
-        int kq = GiaoVuDAO.addGV(giaoVu);
+        StringBuilder sb = new StringBuilder();
+        sb.append("Thêm thông tin giáo vụ không thành công");
+        if(txtMa.getText().compareTo("")!=0) {
+            GiaovuEntity giaoVu = new GiaovuEntity(txtMa.getText());
+            getData(giaoVu);
+            int kq = GiaoVuDAO.addGV(giaoVu);
+            if(kq!=1)
+            {
+                JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
+                    JOptionPane.ERROR_MESSAGE);
+        }
         loadDanhSach();
+
     }
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {
@@ -426,11 +443,17 @@ public class QuanLyGiaoVu extends javax.swing.JPanel {
         {
             sb.append("Tài khoản đang thực hiện trên hệ thống, không thể xoá");
             JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
-                    JOptionPane.ERROR_MESSAGE);
+                JOptionPane.ERROR_MESSAGE);
         }
         else{
             int kq = GiaoVuDAO.deleteGV(txtMa.getText());
+            if(kq != 1){
+                sb.append("Xoá tài khoản giáo vụ không thành công");
+                JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         }
+
         loadDanhSach();
     }
 
@@ -446,11 +469,13 @@ public class QuanLyGiaoVu extends javax.swing.JPanel {
             GiaovuEntity giaoVu = GiaoVuDAO.getThongTinGV(txtMa.getText());
             getData(giaoVu);
             int kq = GiaoVuDAO.updateThongTinGV(giaoVu);
-
-            if (kq == 1){
-
+            if (kq != 1){
+                sb.append("Chỉnh sửa thông tin không thành công");
+                JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
+                        JOptionPane.ERROR_MESSAGE);
             }
         }
+
         loadDanhSach();
     }
 
