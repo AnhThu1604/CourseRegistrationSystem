@@ -435,13 +435,23 @@ public class QuanLyGiaoVu extends javax.swing.JPanel {
     }
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) throws ParseException {
-        GiaovuEntity giaoVu = GiaoVuDAO.getThongTinGV(txtMa.getText());
-        getData(giaoVu);
-        int kq = GiaoVuDAO.updateThongTinGV(giaoVu);
-        loadDanhSach();
-        if (kq == 1){
-
+        StringBuilder sb = new StringBuilder();
+        if(txtMa.getText().toLowerCase(Locale.ROOT).compareTo(DangNhap.getUsername()) == 0)
+        {
+            sb.append("Tài khoản đang thực hiện trên hệ thống, chỉnh sửa thông tin ở trang này");
+            JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
+                    JOptionPane.ERROR_MESSAGE);
         }
+        else{
+            GiaovuEntity giaoVu = GiaoVuDAO.getThongTinGV(txtMa.getText());
+            getData(giaoVu);
+            int kq = GiaoVuDAO.updateThongTinGV(giaoVu);
+
+            if (kq == 1){
+
+            }
+        }
+        loadDanhSach();
     }
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) throws ParseException {

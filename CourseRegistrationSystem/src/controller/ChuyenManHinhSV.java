@@ -29,7 +29,7 @@ public class ChuyenManHinhSV {
 
         rootPanel.removeAll();
         rootPanel.setLayout(new BorderLayout());
-        // _rootPanel.add(new TrangChu());
+
 
         switch (kind) {
             case "jpnThongTin": {
@@ -44,9 +44,10 @@ public class ChuyenManHinhSV {
                rootPanel.add(new DoiMatKhau());
            } break;
 
-           // case "DangXuat": {
-           //     _rootPanel.add(new DangKyMonHoc());
-           // } break;
+
+            case"jpnDangXuat":{
+                rootPanel.add(new XacNhanDangXuat());
+            }break;
 
         
         }
@@ -90,6 +91,9 @@ public class ChuyenManHinhSV {
                 case "jpnDoiMK": {
                     node = new DoiMatKhau();
                 } break;
+                case "jpnDangXuat": {
+                    node = new XacNhanDangXuat();
+                } break;
          
             }
             rootPanel.removeAll();
@@ -99,6 +103,7 @@ public class ChuyenManHinhSV {
             rootPanel.repaint();
             setChangeBackground(kind);
         }
+
 
         @Override
         public void mousePressed(MouseEvent e) {

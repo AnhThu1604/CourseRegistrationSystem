@@ -10,6 +10,7 @@ import pojo.SinhvienEntity;
 import util.HibernateUtil;
 
 import javax.persistence.Query;
+import java.util.Iterator;
 import java.util.List;
 public class LopHocDAO {
 
@@ -104,5 +105,45 @@ public class LopHocDAO {
             session.close();
         }
         return 1;
+    }
+
+
+    public static void ThemSV(LophocEntity lh, String phai){
+        Integer nam = lh.getTongSvNam();
+        Integer nu = lh.getTongSvNu();
+        if(phai.compareTo("Nam") == 0) {
+            lh.setTongSvNam(nam + 1);
+        }
+        else{
+            lh.setTongSvNu(nu + 1);
+        }
+        lh.setTongSv(nam+nu+1);
+        updateThongTinLH(lh);
+    }
+    public static void XoaSV(LophocEntity lh, String phai){
+        Integer nam = lh.getTongSvNam();
+        Integer nu = lh.getTongSvNu();
+        if(phai.compareTo("Nam") == 0) {
+            lh.setTongSvNam(nam - 1);
+        }
+        else{
+            lh.setTongSvNu(nu - 1);
+        }
+        lh.setTongSv(nam+nu-1);
+        updateThongTinLH(lh);
+    }
+    public static void SuaSV(LophocEntity lh, String phai){
+        Integer nam = lh.getTongSvNam();
+        Integer nu = lh.getTongSvNu();
+        if(phai.compareTo("Nam") == 0) {
+            lh.setTongSvNam(nam + 1);
+            lh.setTongSv(nu - 1);
+        }
+        else{
+            lh.setTongSvNu(nu + 1);
+            lh.setTongSvNam(nam - 1);
+        }
+        lh.setTongSv(nam+nu);
+        updateThongTinLH(lh);
     }
 }

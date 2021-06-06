@@ -62,9 +62,9 @@ public class ChuyenManHinhGV {
                rootPanel.add(new DoiMatKhau());
            } break;
 
-           // case "DangXuat": {
-           //     _rootPanel.add(new DangKyMonHoc());
-           // } break;
+           case "DangXuat": {
+               rootPanel.add(new XacNhanDangXuat());
+           } break;
 
         
         }
@@ -124,6 +124,10 @@ public class ChuyenManHinhGV {
 
                 case "jpnDoiMK": {
                     node = new DoiMatKhau();
+                } break;
+
+                case "jpnDangXuat": {
+                    node = new XacNhanDangXuat();
                 } break;
          
             }

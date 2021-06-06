@@ -17,5 +17,11 @@
         <property name="tongSvNu">
             <column name="TongSVNu" sql-type="int" />
         </property>
+        <set name="list" inverse="true" lazy="false" fetch="join">
+            <key>
+                <column name="Lop" length="10" not-null="true"></column>
+            </key>
+            <one-to-many class="pojo.SinhvienEntity"/>
+        </set>
     </class>
 </hibernate-mapping>

@@ -30,6 +30,7 @@ public class GiaoVu extends javax.swing.JFrame {
 
 
         list.add(new DanhMuc("jpnDoiMK",jpnDoiMK, jlbDoiMK ));
+        list.add(new DanhMuc("jpnDangXuat",jpnDangXuat, jlbDangXuat ));
         controller.setEvent(list);
     }
 

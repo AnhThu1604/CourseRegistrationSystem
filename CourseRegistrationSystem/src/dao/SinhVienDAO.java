@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import pojo.GiaovuEntity;
+import pojo.LophocEntity;
 import pojo.SinhvienEntity;
 import util.HibernateUtil;
 
@@ -12,10 +13,10 @@ import javax.persistence.Query;
 import java.util.List;
 public class SinhVienDAO {
 
-    public static List<SinhvienEntity> getDanhSachSV(){
-        List<SinhvienEntity> ds=null;
-        SessionFactory factory= HibernateUtil.getSessionFactory();
-        Session session=factory.openSession();
+    public static List<SinhvienEntity> getDanhSachSV() {
+        List<SinhvienEntity> ds = null;
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
         try {
             String hql = "select sv from SinhvienEntity sv";
             Query query = session.createQuery(hql);
@@ -30,16 +31,15 @@ public class SinhVienDAO {
         return ds;
     }
 
-    public static SinhvienEntity getThongTinSV(String maSinhVien){
+    public static SinhvienEntity getThongTinSV(String maSinhVien) {
         SinhvienEntity sv = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        try{
+        try {
             sv = (SinhvienEntity) session.get(SinhvienEntity.class, maSinhVien);
 
-        }
-        catch (HibernateException ex){
+        } catch (HibernateException ex) {
             System.err.println(ex);
-        }finally {
+        } finally {
             session.close();
         }
         return sv;
@@ -87,7 +87,7 @@ public class SinhVienDAO {
     public static int deleteSV(String maSinhVien) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         SinhvienEntity sv = SinhVienDAO.getThongTinSV(maSinhVien);
-        if(sv == null){
+        if (sv == null) {
             return 0;
         }
         Transaction transaction = null;
@@ -104,15 +104,17 @@ public class SinhVienDAO {
         return 1;
     }
 
-    public static SinhvienEntity xacThucTK (String ma, String mk){
+    public static SinhvienEntity xacThucTK(String ma, String mk) {
         SinhvienEntity sinhVien = getThongTinSV(ma);
-        if(sinhVien == null || sinhVien.getMatKhau() == null)
-        {
+        if (sinhVien == null || sinhVien.getMatKhau() == null) {
             return null;
         }
-        if(sinhVien.getMatKhau().equals(mk)== true){
+        if (sinhVien.getMatKhau().equals(mk) == true) {
             return sinhVien;
         }
         return null;
     }
+
+
+
 }

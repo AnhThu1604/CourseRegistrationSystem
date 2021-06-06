@@ -2,8 +2,14 @@
 package view;
 import controller.ChuyenManHinhSV;
 import bean.DanhMuc;
-import java.util.*;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.*;
+import java.util.List;
 
 
 public class SinhVien extends javax.swing.JFrame {
@@ -20,8 +26,12 @@ public class SinhVien extends javax.swing.JFrame {
         list.add(new DanhMuc("jpnThongTin",jpnThongTin, jlbThongTin ));
         list.add(new DanhMuc("jpnDangKi",jpnDangKi, jlbDangKi ));
         list.add(new DanhMuc("jpnDoiMK",jpnDoiMK, jlbDoiMK ));
+        list.add(new DanhMuc("jpnDangXuat",jpnDangXuat, jlbDangXuat ));
         controller.setEvent(list);
+
     }
+
+
 
 
     @SuppressWarnings("unchecked")
@@ -200,8 +210,6 @@ public class SinhVien extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

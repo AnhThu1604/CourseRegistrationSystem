@@ -35,5 +35,6 @@
         <property name="maQuyenDn">
             <column name="MaQuyenDN" sql-type="int"/>
         </property>
+
     </class>
 </hibernate-mapping>

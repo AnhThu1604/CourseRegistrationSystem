@@ -200,12 +200,14 @@ public class DangNhap extends javax.swing.JFrame {
                 }
                 else {
                     this.iduser = 1;
+                    setVisible(false);
                     new SinhVien().setVisible(true);
                 }
             }
             else
             {
                 this.iduser = 0;
+                setVisible(false);
                 new GiaoVu().setVisible(true);
             }
         }
