@@ -23,9 +23,6 @@
         <property name="cmnd">
             <column name="CMND" sql-type="varchar(12)" length="12" />
         </property>
-        <property name="lop">
-            <column name="Lop" sql-type="varchar(10)" length="10" />
-        </property>
         <property name="matKhau">
             <column name="MatKhau" sql-type="varchar(50)" length="50" />
         </property>
@@ -35,6 +32,10 @@
         <property name="maQuyenDn">
             <column name="MaQuyenDN" sql-type="int"/>
         </property>
+        <many-to-one name="lop" class="pojo.LophocEntity"
+                     fetch="select" lazy="false">
+            <column name="Lop" length="45"/>
+        </many-to-one>
 
     </class>
 </hibernate-mapping>

@@ -14,5 +14,9 @@
         <property name="ngayKetThuc">
             <column name="NgayKetThuc" sql-type="date" not-null="true"/>
         </property>
+        <many-to-one name="hocKi" class="pojo.HockiEntity"
+                     fetch="select" lazy="false">
+            <column name="MaHocKi" length="45"/>
+        </many-to-one>
     </class>
 </hibernate-mapping>

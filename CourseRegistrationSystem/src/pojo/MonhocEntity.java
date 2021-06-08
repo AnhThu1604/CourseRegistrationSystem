@@ -1,11 +1,15 @@
 package pojo;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class MonhocEntity {
     private String maMonHoc;
     private String tenMonHoc;
     private Integer soTinChi;
+    private HockiEntity hocKi;
+    private Set<HocphanEntity> hocphans = new HashSet<HocphanEntity>(0);
 
     public MonhocEntity(){
 
@@ -43,6 +47,23 @@ public class MonhocEntity {
 
     public void setSoTinChi(Integer soTinChi) {
         this.soTinChi = soTinChi;
+    }
+
+
+    public HockiEntity getHocKi() {
+        return hocKi;
+    }
+
+    public void setHocKi(HockiEntity hocKi) {
+        this.hocKi = hocKi;
+    }
+
+    public Set<HocphanEntity> getHocphans() {
+        return hocphans;
+    }
+
+    public void setHocphans(Set<HocphanEntity> hocphans) {
+        this.hocphans = hocphans;
     }
 
     @Override

@@ -12,13 +12,29 @@
             <column name="TenHocKi" sql-type="varchar(50)" length="50" not-null="true"/>
         </property>
         <property name="namHoc">
-            <column name="NamHoc" sql-type="date" not-null="true"/>
+            <column name="NamHoc" sql-type="int"/>
         </property>
         <property name="ngayBatDau">
-            <column name="NgayBatDau" sql-type="date" not-null="true"/>
+            <column name="NgayBatDau" sql-type="date" />
         </property>
         <property name="ngayKetThuc">
-            <column name="NgayKetThuc" sql-type="date" not-null="true"/>
+            <column name="NgayKetThuc" sql-type="date" />
         </property>
+        <property name="kiHienTai">
+            <column name="KiHienTai" sql-type="int" />
+        </property>
+        <set inverse="true" name="mons"
+        fetch="join" lazy="false">
+            <key>
+                <column name="MaHocKi" not-null="true"/>
+            </key>
+            <one-to-many class="pojo.MonhocEntity"/>
+        </set>
+        <set name="dks" inverse="true" fetch="join" lazy="false">
+            <key>
+                <column name="MaHocKi" not-null="true"/>
+            </key>
+            <one-to-many class="pojo.DangkiHpEntity"/>
+        </set>
     </class>
 </hibernate-mapping>

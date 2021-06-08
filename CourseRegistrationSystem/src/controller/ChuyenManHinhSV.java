@@ -46,7 +46,7 @@ public class ChuyenManHinhSV {
 
 
             case"jpnDangXuat":{
-                rootPanel.add(new XacNhanDangXuat());
+
             }break;
 
         
@@ -92,7 +92,14 @@ public class ChuyenManHinhSV {
                     node = new DoiMatKhau();
                 } break;
                 case "jpnDangXuat": {
-                    node = new XacNhanDangXuat();
+                    String[] options = {"Chắc chắn", "Huỷ"};
+                    int kq = JOptionPane.showOptionDialog(null, "Bạn có chắn chắc muốn thoát khỏi hệ thống?",
+                            "Nhấn vào lựa chọn của bạn",JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                            null, options, options[0]);
+                    if(kq == 0)
+                    {
+                        System.exit(0);
+                    }
                 } break;
          
             }

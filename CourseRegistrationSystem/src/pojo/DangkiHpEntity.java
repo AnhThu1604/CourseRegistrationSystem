@@ -7,6 +7,7 @@ public class DangkiHpEntity {
     private int maDkhp;
     private Date ngayBatDau;
     private Date ngayKetThuc;
+    private HockiEntity hocKi;
 
     public DangkiHpEntity(){
 
@@ -16,11 +17,12 @@ public class DangkiHpEntity {
         this.maDkhp = maDkhp;
     }
 
-    public DangkiHpEntity(int maDkhp, Date ngayBatDau, Date ngayKetThuc)
+    public DangkiHpEntity(int maDkhp, Date ngayBatDau, Date ngayKetThuc, HockiEntity hocKi)
     {
         this.maDkhp = maDkhp;
         this.ngayBatDau = ngayBatDau;
         this.ngayKetThuc = ngayKetThuc;
+        this.hocKi = hocKi;
     }
 
     public int getMaDkhp() {
@@ -47,6 +49,13 @@ public class DangkiHpEntity {
         this.ngayKetThuc = ngayKetThuc;
     }
 
+    public HockiEntity getHocKi() {
+        return hocKi;
+    }
+
+    public void setHocKi(HockiEntity hocKi) {
+        this.hocKi = hocKi;
+    }
 
     @Override
     public boolean equals(Object o) {

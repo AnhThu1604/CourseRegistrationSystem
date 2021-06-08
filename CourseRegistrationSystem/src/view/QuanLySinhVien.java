@@ -33,13 +33,17 @@ public class QuanLySinhVien extends javax.swing.JPanel {
         dtm.addColumn("Họ và tên");
         dtm.addColumn("Ngày sinh");
         dtm.addColumn("Địa chỉ");
-        String lop = box.getItemAt(box.getSelectedIndex()).toString();
+        String lop = box.getItemAt(box.getSelectedIndex());
+        if(lop == null){
+            for(SinhvienEntity sinhVien:SinhVienDAO.getDanhSachSV())
+                dtm.addRow(new Object[]{sinhVien.getMaSinhVien(), sinhVien.getHoVaTen(), sinhVien.getNgaySinh(), sinhVien.getDiaChi()});
+        }else{
         LophocEntity lopHoc = LopHocDAO.getThongTinLH(lop);
         Iterator<SinhvienEntity> list = lopHoc.getList().iterator();
-
         while (list.hasNext()) {
             SinhvienEntity sinhVien = list.next();
             dtm.addRow(new Object[]{sinhVien.getMaSinhVien(), sinhVien.getHoVaTen(), sinhVien.getNgaySinh(), sinhVien.getDiaChi()});
+        }
         }
         jTable2.setModel(dtm);
 
@@ -55,29 +59,29 @@ public class QuanLySinhVien extends javax.swing.JPanel {
 
     private void loadClass(){
         List<LophocEntity> ds = LopHocDAO.getDanhSachLH();
-        for(int i=1; i<ds.size(); i++){
+        if (ds == null)
+            return;
+        for(int i=0; i<ds.size(); i++){
             box.addItem(ds.get(i).getMaLopHoc());
         }
 
     }
 
     private void getData(SinhvienEntity sinhVien) throws ParseException {
+        StringBuilder sb = new StringBuilder();
         sinhVien.setHoVaTen(txtTen.getText());
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        if(txtNgaySinh.getText().compareTo("") == 0) {
-            Date date = format.parse("0000-00-00");
-            sinhVien.setNgaySinh(date);
+        String date;
+        date = txtNgaySinh.getText();
+        if(date.compareTo("") == 0) {
+            date = "0000-00-00";
         }
-        else{
-            Date date = format.parse(txtNgaySinh.getText());
-            sinhVien.setNgaySinh(date);
-        }
+        sinhVien.setNgaySinh(format.parse(date));
         sinhVien.setCmnd(txtCMND.getText());
         sinhVien.setDiaChi(txtDiaChi.getText());
         sinhVien.setEmail(txtEmail.getText());
         sinhVien.setMatKhau(jPasswordField1.getText());
-        sinhVien.setPhai(box1.getItemAt(box1.getSelectedIndex()).toString());
-        sinhVien.setLop(box.getItemAt(box.getSelectedIndex()).toString());
+        sinhVien.setPhai(box1.getItemAt(box1.getSelectedIndex()));
     }
 
     private void setData(SinhvienEntity sinhVien) {
@@ -456,9 +460,9 @@ public class QuanLySinhVien extends javax.swing.JPanel {
                 return;
             }
         }
-        if(sinhVien == null) {
+        if(txtMa.getText() == null) {
             StringBuilder sb = new StringBuilder();
-            sb.append("Khong tìm thấy giáo vụ có mã "+ jTextFieldSearch.getText());
+            sb.append("Không tìm thấy sv có mã "+ jTextFieldSearch.getText());
             JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
                     JOptionPane.ERROR_MESSAGE);
             loadDanhSach();
@@ -475,22 +479,33 @@ public class QuanLySinhVien extends javax.swing.JPanel {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) throws ParseException {
         StringBuilder sb = new StringBuilder();
-        sb.append("Thêm không thành công");
-        if(txtMa.getText().compareTo("") != 0) {
-            SinhvienEntity sinhVien = new SinhvienEntity(txtMa.getText());
-            getData(sinhVien);
-            int kq = SinhVienDAO.addSV(sinhVien);
-            if (kq == 1) {
-                LophocEntity lopHoc = LopHocDAO.getThongTinLH(box.getItemAt(box.getSelectedIndex()));
-                LopHocDAO.ThemSV(lopHoc, box1.getItemAt(box1.getSelectedIndex()));
-            }else {
+        String maLopHoc = box.getItemAt(box.getSelectedIndex());
+
+        if(maLopHoc == null) {
+            sb.append("Lớp học không được rỗng");
+            JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            LophocEntity lopHoc = LopHocDAO.getThongTinLH(maLopHoc);
+            if (txtMa.getText().compareTo("") != 0) {
+                SinhvienEntity sinhVien = new SinhvienEntity(txtMa.getText());
+                sinhVien.setLop(lopHoc);
+                getData(sinhVien);
+                int kq = SinhVienDAO.addSV(sinhVien);
+                if (kq == 1) {
+                    JOptionPane.showMessageDialog(this, "Thêm thành công");
+                    LopHocDAO.ThemSV(lopHoc, box1.getItemAt(box1.getSelectedIndex()));
+                } else {
+                    sb.append("Thêm không thành công");
+                    JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                sb.append("Mã sinh viên không được rỗng");
                 JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
                         JOptionPane.ERROR_MESSAGE);
             }
-        }
-        else{
-            JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
-                    JOptionPane.ERROR_MESSAGE);
         }
         loadDanhSach();
 
@@ -505,6 +520,7 @@ public class QuanLySinhVien extends javax.swing.JPanel {
         getData(sinhVien);
         int kq = SinhVienDAO.updateThongTinSV(sinhVien);
         if (kq == 1) {
+            JOptionPane.showMessageDialog(this, "Chỉnh sửa thành công");
             LophocEntity lopHoc = LopHocDAO.getThongTinLH(box.getItemAt(box.getSelectedIndex()));
             LopHocDAO.SuaSV(lopHoc, box1.getItemAt(box1.getSelectedIndex()));
         }
@@ -524,6 +540,7 @@ public class QuanLySinhVien extends javax.swing.JPanel {
         StringBuilder sb = new StringBuilder();
         sb.append("Xoá sinh viên không thành công");
         if(kq == 1){
+            JOptionPane.showMessageDialog(this, "Xoá thành công");
             LophocEntity lopHoc = LopHocDAO.getThongTinLH(box.getItemAt(box.getSelectedIndex()));
             LopHocDAO.XoaSV(lopHoc, box1.getItemAt(box1.getSelectedIndex()));
         }

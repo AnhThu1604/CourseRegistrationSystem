@@ -1,16 +1,21 @@
 package pojo;
 
-import java.util.Objects;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class HocphanEntity {
     private String maHocPhan;
-    private String tenMonHoc;
-    private Integer soTinChi;
+    private MonhocEntity monHoc;
+
+
     private String giaoVien;
     private String tenPhongHoc;
     private Integer ngayHoc;
     private Integer caHoc;
     private Integer slotToiDa;
+
+    private Set<SinhvienEntity> sinhviens = new HashSet<SinhvienEntity>(0);
 
     public HocphanEntity(){
 
@@ -19,11 +24,10 @@ public class HocphanEntity {
         this.maHocPhan = maHocPhan;
     }
 
-    public HocphanEntity(String maHocPhan, String tenMonHoc, Integer soTinChi, String giaoVien,
+    public HocphanEntity(String maHocPhan, MonhocEntity monHoc, String giaoVien,
                          String tenPhongHoc, Integer ngayHoc, Integer caHoc, Integer slotToiDa){
         this.maHocPhan = maHocPhan;
-        this.tenMonHoc = tenMonHoc;
-        this.soTinChi = soTinChi;
+        this.monHoc = monHoc;
         this.giaoVien = giaoVien;
         this.tenPhongHoc = tenPhongHoc;
         this.ngayHoc = ngayHoc;
@@ -39,20 +43,12 @@ public class HocphanEntity {
         this.maHocPhan = maHocPhan;
     }
 
-    public String getTenMonHoc() {
-        return tenMonHoc;
+    public MonhocEntity getMonHoc() {
+        return monHoc;
     }
 
-    public void setTenMonHoc(String tenMonHoc) {
-        this.tenMonHoc = tenMonHoc;
-    }
-
-    public Integer getSoTinChi() {
-        return soTinChi;
-    }
-
-    public void setSoTinChi(Integer soTinChi) {
-        this.soTinChi = soTinChi;
+    public void setMonHoc(MonhocEntity monHoc) {
+        this.monHoc = monHoc;
     }
 
     public String getGiaoVien() {
@@ -95,16 +91,11 @@ public class HocphanEntity {
         this.slotToiDa = slotToiDa;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        HocphanEntity that = (HocphanEntity) o;
-        return Objects.equals(maHocPhan, that.maHocPhan) && Objects.equals(tenMonHoc, that.tenMonHoc) && Objects.equals(soTinChi, that.soTinChi) && Objects.equals(giaoVien, that.giaoVien) && Objects.equals(tenPhongHoc, that.tenPhongHoc) && Objects.equals(ngayHoc, that.ngayHoc) && Objects.equals(caHoc, that.caHoc) && Objects.equals(slotToiDa, that.slotToiDa);
+    public Set<SinhvienEntity> getSinhviens() {
+        return sinhviens;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(maHocPhan, tenMonHoc, soTinChi, giaoVien, tenPhongHoc, ngayHoc, caHoc, slotToiDa);
+    public void setSinhviens(Set<SinhvienEntity> sinhviens) {
+        this.sinhviens = sinhviens;
     }
 }

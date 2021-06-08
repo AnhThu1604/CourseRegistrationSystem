@@ -1,17 +1,22 @@
 package pojo;
 
+import java.time.Year;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class HockiEntity {
     private int maHocKi;
     private String tenHocKi;
-    private Date namHoc;
+    private int namHoc;
     private Date ngayBatDau;
     private Date ngayKetThuc;
+    private int kiHienTai;
+    private Set<MonhocEntity> mons = new HashSet<MonhocEntity>(0);
+    private Set<DangkiHpEntity> dks = new HashSet<DangkiHpEntity>(0);
 
     public HockiEntity(){
-
     }
 
     public HockiEntity(int maHocKi){
@@ -41,11 +46,11 @@ public class HockiEntity {
         this.tenHocKi = tenHocKi;
     }
 
-    public Date getNamHoc() {
+    public int getNamHoc() {
         return namHoc;
     }
 
-    public void setNamHoc(Date namHoc) {
+    public void setNamHoc(int namHoc) {
         this.namHoc = namHoc;
     }
 
@@ -63,6 +68,30 @@ public class HockiEntity {
 
     public void setNgayKetThuc(Date ngayKetThuc) {
         this.ngayKetThuc = ngayKetThuc;
+    }
+
+    public int getKiHienTai() {
+        return kiHienTai;
+    }
+
+    public void setKiHienTai(int kiHienTai) {
+        this.kiHienTai = kiHienTai;
+    }
+
+    public Set<MonhocEntity> getMons() {
+        return mons;
+    }
+
+    public void setMons(Set<MonhocEntity> mons) {
+        this.mons = mons;
+    }
+
+    public Set<DangkiHpEntity> getDks() {
+        return dks;
+    }
+
+    public void setDks(Set<DangkiHpEntity> dks) {
+        this.dks = dks;
     }
 
     @Override

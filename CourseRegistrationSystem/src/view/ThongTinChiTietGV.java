@@ -11,6 +11,7 @@ import dao.SinhVienDAO;
 import pojo.GiaovuEntity;
 import pojo.SinhvienEntity;
 
+import javax.swing.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -82,11 +83,6 @@ public class ThongTinChiTietGV extends javax.swing.JPanel {
 
         jLabel9.setText("Email");
 
-        txtMa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMaActionPerformed(evt);
-            }
-        });
 
         btnLuu.setText("Lưu");
         btnLuu.addActionListener(new java.awt.event.ActionListener() {
@@ -188,21 +184,17 @@ public class ThongTinChiTietGV extends javax.swing.JPanel {
         );
     }// </editor-fold>
 
-    private void txtMaActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
+
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) throws ParseException {
         giaoVu.setHoVaTen(txtTen.getText());
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        if(txtNgaySinh.getText().compareTo("") == 0) {
-            Date date = format.parse("0000-00-00");
-            giaoVu.setNgaySinh(date);
+        String date;
+        date = txtNgaySinh.getText();
+        if(date.compareTo("") == 0) {
+            date = "0000-00-00";
         }
-        else{
-            Date date = format.parse(txtNgaySinh.getText());
-            giaoVu.setNgaySinh(date);
-        }
+        giaoVu.setNgaySinh(format.parse(date));
         giaoVu.setCmnd(txtCMND.getText());
         giaoVu.setDiaChi(txtDiaChi.getText());
         giaoVu.setEmail(txtEmail.getText());
@@ -212,7 +204,7 @@ public class ThongTinChiTietGV extends javax.swing.JPanel {
         giaoVu.setPhai(jComboBox1.getItemAt(jComboBox1.getSelectedIndex()).toString());
         int kq = GiaoVuDAO.updateThongTinGV(giaoVu);
         if (kq == 1){
-
+            JOptionPane.showMessageDialog(this, "Chỉnh sửa thành công");
         }
     }
 

@@ -12,10 +12,19 @@ public class SinhvienEntity {
     private String phai;
     private String diaChi;
     private String cmnd;
-    private String lop;
+    private LophocEntity lop;
     private String matKhau;
     private String email;
     private int maQuyenDn;
+    private Set<HocphanEntity> hocphans = new HashSet<HocphanEntity>(0);
+
+    public Set<HocphanEntity> getHocphans() {
+        return hocphans;
+    }
+
+    public void setHocphans(Set<HocphanEntity> hocphans) {
+        this.hocphans = hocphans;
+    }
 
     public SinhvienEntity(){
 
@@ -26,7 +35,7 @@ public class SinhvienEntity {
     }
 
     public SinhvienEntity(String maSinhVien, String hoVaTen, String phai, Date ngaySinh, String diaChi,
-                        String cmnd, String lop, String matKhau, String email){
+                        String cmnd, LophocEntity lop, String matKhau, String email){
         this.maSinhVien = maSinhVien;
         this.hoVaTen = hoVaTen;
         this.phai = phai;
@@ -86,12 +95,12 @@ public class SinhvienEntity {
         this.cmnd = cmnd;
     }
 
-    public String getLop() {
-        return lop;
+    public void setLop(LophocEntity lop) {
+        this.lop = lop;
     }
 
-    public void setLop(String lop) {
-        this.lop = lop;
+    public LophocEntity getLop() {
+        return lop;
     }
 
     public String getMatKhau() {

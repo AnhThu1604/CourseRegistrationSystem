@@ -8,17 +8,12 @@
         <id name="maHocPhan">
             <column name="MaHocPhan" sql-type="varchar(30)" length="30"/>
         </id>
-        <property name="tenMonHoc">
-            <column name="TenMonHoc" sql-type="varchar(50)" length="50" not-null="true"/>
-        </property>
-        <property name="soTinChi">
-            <column name="SoTinChi" sql-type="int" not-null="true"/>
-        </property>
+
         <property name="giaoVien">
-            <column name="GiaoVien" sql-type="varchar(50)" length="50" not-null="true"/>
+            <column name="GiaoVien" sql-type="varchar(50)" length="50" />
         </property>
         <property name="tenPhongHoc">
-            <column name="TenPhongHoc" sql-type="varchar(50)" length="50" not-null="true"/>
+            <column name="TenPhongHoc" sql-type="varchar(50)" length="50" />
         </property>
         <property name="ngayHoc">
             <column name="NgayHoc" sql-type="int" not-null="true"/>
@@ -27,7 +22,12 @@
             <column name="CaHoc" sql-type="int" not-null="true"/>
         </property>
         <property name="slotToiDa">
-            <column name="SlotToiDa" sql-type="int" not-null="true"/>
+            <column name="SlotToiDa" sql-type="int" />
         </property>
+        <many-to-one name="monHoc" class="pojo.MonhocEntity"
+                     fetch="select" lazy="false">
+            <column name="MaMonHoc" length="45"/>
+        </many-to-one>
+
     </class>
 </hibernate-mapping>

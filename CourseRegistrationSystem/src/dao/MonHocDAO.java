@@ -4,11 +4,14 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import pojo.HockiEntity;
+import pojo.HocphanEntity;
 import pojo.MonhocEntity;
 import pojo.SinhvienEntity;
 import util.HibernateUtil;
 
 import javax.persistence.Query;
+import java.util.Iterator;
 import java.util.List;
 public class MonHocDAO {
 
@@ -64,15 +67,15 @@ public class MonHocDAO {
         return 1;
     }
 
-    public static int updateThongTinSV(SinhvienEntity sv) {
+    public static int updateThongTinMH(MonhocEntity mh) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        if (SinhVienDAO.getThongTinSV(sv.getMaSinhVien()) == null) {
+        if (MonHocDAO.getThongTinMH(mh.getMaMonHoc()) == null) {
             return 0;
         }
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            session.update(sv);
+            session.update(mh);
             transaction.commit();
         } catch (HibernateException ex) {
 
@@ -103,5 +106,8 @@ public class MonHocDAO {
         }
         return 1;
     }
+
+
+
 }
 

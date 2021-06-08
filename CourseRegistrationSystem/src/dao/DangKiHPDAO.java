@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import pojo.DangkiHpEntity;
+import pojo.GiaovuEntity;
 import util.HibernateUtil;
 
 import javax.persistence.Query;
@@ -52,6 +53,46 @@ public class DangKiHPDAO {
         try {
             transaction = session.beginTransaction();
             session.save(TGDK);
+            transaction.commit();
+        } catch (HibernateException ex) {
+            transaction.rollback();
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return 1;
+    }
+
+    public static int updateThongTinThoiGianDK(DangkiHpEntity tg) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        if (DangKiHPDAO.getThongTinTGDK(tg.getMaDkhp()) == null) {
+            return 0;
+        }
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.update(tg);
+            transaction.commit();
+        } catch (HibernateException ex) {
+
+            transaction.rollback();
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return 1;
+    }
+
+    public static int deleteThoiGianDK(int ma) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        DangkiHpEntity dk = DangKiHPDAO.getThongTinTGDK(ma);
+        if(dk == null){
+            return 0;
+        }
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.delete(dk);
             transaction.commit();
         } catch (HibernateException ex) {
             transaction.rollback();

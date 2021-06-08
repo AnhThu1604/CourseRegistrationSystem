@@ -32,7 +32,7 @@ public class ThongTinChiTietSV extends javax.swing.JPanel {
         if(sinhVien.getPhai().compareTo("Nữ") == 0) {
             jComboBox1.setSelectedIndex(1);
         }
-        txtLopHoc.setText(sinhVien.getLop());
+
         txtEmail.setText(sinhVien.getEmail());
     }
 
@@ -240,14 +240,12 @@ public class ThongTinChiTietSV extends javax.swing.JPanel {
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) throws ParseException {
         sinhVien.setHoVaTen(txtTen.getText());
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        if(txtNgaySinh.getText().compareTo("") == 0) {
-            Date date = format.parse("0000-00-00");
-            sinhVien.setNgaySinh(date);
+        String date;
+        date = txtNgaySinh.getText();
+        if(date.compareTo("") == 0) {
+            date = "0000-00-00";
         }
-        else{
-            Date date = format.parse(txtNgaySinh.getText());
-            sinhVien.setNgaySinh(date);
-        }
+        sinhVien.setNgaySinh(format.parse(date));
         sinhVien.setCmnd(txtCMND.getText());
         sinhVien.setDiaChi(txtDiaChi.getText());
         sinhVien.setEmail(txtEmail.getText());
@@ -257,7 +255,7 @@ public class ThongTinChiTietSV extends javax.swing.JPanel {
         sinhVien.setPhai(jComboBox1.getItemAt(jComboBox1.getSelectedIndex()).toString());
         int kq = SinhVienDAO.updateThongTinSV(sinhVien);
         if (kq == 1){
-
+            JOptionPane.showMessageDialog(this, "Chỉnh sửa thành công");
         }
     }
 

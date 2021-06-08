@@ -19,7 +19,6 @@ public class LophocEntity {
         this.list = list;
     }
 
-
     public LophocEntity(){
 
     }

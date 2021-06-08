@@ -32,7 +32,7 @@ public class LopHoc extends javax.swing.JPanel {
         dtm.addColumn("Số sinh viên nữ");
         for (LophocEntity lopHoc : LopHocDAO.getDanhSachLH())
             dtm.addRow(new Object[]{lopHoc.getMaLopHoc(), lopHoc.getTongSv(), lopHoc.getTongSvNam(), lopHoc.getTongSvNu()});
-        dtm.removeRow(0);
+
         jTable1.setModel(dtm);
     }
     @SuppressWarnings("unchecked")
@@ -167,6 +167,10 @@ public class LopHoc extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
                         JOptionPane.ERROR_MESSAGE);
             }
+            else
+            {
+                JOptionPane.showMessageDialog(this, "Thêm thành công");
+            }
         }
         else{
             sb.append("Vui lòng nhập mã lớp");
@@ -182,19 +186,16 @@ public class LopHoc extends javax.swing.JPanel {
         String maLopHoc = txtTim.getText();
         System.out.println(maLopHoc);
         if(maLopHoc.compareTo("")!=0){
-            LophocEntity lopHoc = LopHocDAO.getThongTinLH(maLopHoc);
-            Iterator<SinhvienEntity> list = lopHoc.getList().iterator();
-            while (list.hasNext()) {
-                SinhvienEntity sinhVien = list.next();
-                sinhVien.setLop("");
-                SinhVienDAO.updateThongTinSV(sinhVien);
-            }
             int kq = LopHocDAO.deleteLH(maLopHoc);
             if(kq == 0){
                 sb.append("Xoá không thành công");
                 JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
                         JOptionPane.ERROR_MESSAGE);
             }
+            else{
+                JOptionPane.showMessageDialog(this, "Xoá thành công");
+            }
+
         }else{
             sb.append("Vui lòng nhập mã lớp để xoá");
             JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",

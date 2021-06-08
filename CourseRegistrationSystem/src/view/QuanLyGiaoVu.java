@@ -2,6 +2,7 @@
 package view;
 
 
+import dao.DangKiHPDAO;
 import dao.LopHocDAO;
 import dao.GiaoVuDAO;
 import dao.SinhVienDAO;
@@ -49,19 +50,17 @@ public class QuanLyGiaoVu extends javax.swing.JPanel {
     private void getData(GiaovuEntity giaoVu) throws ParseException {
         giaoVu.setHoVaTen(txtTen.getText());
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        if(txtNgaySinh.getText().compareTo("") == 0) {
-            Date date = format.parse("0000-00-00");
-            giaoVu.setNgaySinh(date);
+        String date;
+        date = txtNgaySinh.getText();
+        if(date.compareTo("") == 0) {
+            date = "0000-00-00";;
         }
-        else{
-            Date date = format.parse(txtNgaySinh.getText());
-            giaoVu.setNgaySinh(date);
-        }
+        giaoVu.setNgaySinh(format.parse(date));
         giaoVu.setCmnd(txtCMND.getText());
         giaoVu.setDiaChi(txtDiaChi.getText());
         giaoVu.setEmail(txtEmail.getText());
         giaoVu.setMatKhau(txtMatKhau.getText());
-        giaoVu.setPhai(box1.getItemAt(box1.getSelectedIndex()).toString());
+        giaoVu.setPhai(box1.getItemAt(box1.getSelectedIndex()));
 
     }
 
@@ -162,11 +161,7 @@ public class QuanLyGiaoVu extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jTextFieldSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldSearchActionPerformed(evt);
-            }
-        });
+
 
         jButtonSearch.setText("Tìm kiếm");
         jButtonSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -203,11 +198,7 @@ public class QuanLyGiaoVu extends javax.swing.JPanel {
             }
         });
 
-        txtMa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMaActionPerformed(evt);
-            }
-        });
+
 
         jLabel1.setText("Thông tin chi tiết");
 
@@ -218,11 +209,7 @@ public class QuanLyGiaoVu extends javax.swing.JPanel {
         jLabel4.setText("Mật khẩu");
 
         box1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
-        box1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                box1ActionPerformed(evt);
-            }
-        });
+
 
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
@@ -395,7 +382,7 @@ public class QuanLyGiaoVu extends javax.swing.JPanel {
         if(giaoVu == null)
         {
             StringBuilder sb = new StringBuilder();
-            sb.append("Khong tìm thấy giáo vụ có mã "+ jTextFieldSearch.getText());
+            sb.append("Không tìm thấy giáo vụ có mã "+ jTextFieldSearch.getText());
             JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
                 JOptionPane.ERROR_MESSAGE);
             loadDanhSach();
@@ -404,17 +391,8 @@ public class QuanLyGiaoVu extends javax.swing.JPanel {
         }
     }
 
-    private void jTextFieldSearchActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
 
-    private void txtMaActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
 
-    private void box1ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) throws ParseException {
         StringBuilder sb = new StringBuilder();
@@ -428,6 +406,9 @@ public class QuanLyGiaoVu extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
                         JOptionPane.ERROR_MESSAGE);
             }
+            else{
+                JOptionPane.showMessageDialog(this, "Thêm thành công");
+            }
         }
         else{
             JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
@@ -439,7 +420,8 @@ public class QuanLyGiaoVu extends javax.swing.JPanel {
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {
         StringBuilder sb = new StringBuilder();
-        if(txtMa.getText().toLowerCase(Locale.ROOT).compareTo(DangNhap.getUsername()) == 0)
+        System.out.println(DangNhap.getUsername());
+        if(txtMa.getText().compareTo(DangNhap.getUsername()) == 0)
         {
             sb.append("Tài khoản đang thực hiện trên hệ thống, không thể xoá");
             JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
@@ -452,6 +434,9 @@ public class QuanLyGiaoVu extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
                         JOptionPane.ERROR_MESSAGE);
             }
+            else{
+                JOptionPane.showMessageDialog(this, "Xoá thành công");
+            }
         }
 
         loadDanhSach();
@@ -459,7 +444,8 @@ public class QuanLyGiaoVu extends javax.swing.JPanel {
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) throws ParseException {
         StringBuilder sb = new StringBuilder();
-        if(txtMa.getText().toLowerCase(Locale.ROOT).compareTo(DangNhap.getUsername()) == 0)
+        System.out.println(DangNhap.getUsername());
+        if(txtMa.getText().compareTo(DangNhap.getUsername()) == 0)
         {
             sb.append("Tài khoản đang thực hiện trên hệ thống, chỉnh sửa thông tin ở trang này");
             JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
@@ -473,6 +459,9 @@ public class QuanLyGiaoVu extends javax.swing.JPanel {
                 sb.append("Chỉnh sửa thông tin không thành công");
                 JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
                         JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Chỉnh sửa thành công");
             }
         }
 

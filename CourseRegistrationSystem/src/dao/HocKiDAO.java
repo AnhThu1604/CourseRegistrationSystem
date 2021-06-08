@@ -4,10 +4,14 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import pojo.DangkiHpEntity;
 import pojo.HockiEntity;
+import pojo.HocphanEntity;
+import pojo.MonhocEntity;
 import util.HibernateUtil;
 
 import javax.persistence.Query;
+import java.util.Iterator;
 import java.util.List;
 public class HocKiDAO {
 
@@ -16,7 +20,7 @@ public class HocKiDAO {
         SessionFactory factory= HibernateUtil.getSessionFactory();
         Session session=factory.openSession();
         try {
-            String hql = "select HK from SinhvienEntity HK";
+            String hql = "select HK from HockiEntity HK";
             Query query = session.createQuery(hql);
             ds = (List<HockiEntity>) ((org.hibernate.query.Query<?>) query).list();
         } catch (HibernateException ex) {
@@ -102,4 +106,29 @@ public class HocKiDAO {
         }
         return 1;
     }
+
+    //Lay thong tin ki hien tai
+    public static HockiEntity getThongTinHKHT() {
+        HockiEntity HK = null;
+        List<HockiEntity> list = null;
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+        try {
+            String hql = "select HK from HockiEntity HK where HK.kiHienTai = 1";
+            Query query = session.createQuery(hql, HockiEntity.class);
+            list = (List<HockiEntity>) ((org.hibernate.query.Query<?>) query).list();
+        } catch (HibernateException ex) {
+            //Log the exception
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        if(list.size()==0) {
+            return null;
+        }
+        HK = list.get(0);
+        return HK;
+    }
+
+
 }

@@ -9,8 +9,7 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 
 public class ChuyenManHinhGV {
@@ -50,6 +49,9 @@ public class ChuyenManHinhGV {
             case "jpnMonHoc": {
                 rootPanel.add(new MonHoc());
             } break;
+            case "jpnHocPhan": {
+                rootPanel.add(new HocPhan());
+            } break;
             case "jpnHocKi": {
                 rootPanel.add(new HocKi());
             } break;
@@ -58,12 +60,16 @@ public class ChuyenManHinhGV {
                 rootPanel.add(new LopHoc());
             } break;
 
+            case "jpnDKHP": {
+                rootPanel.add(new KiDangKyHocPhan());
+            } break;
+
            case "jpnDoiMK": {
                rootPanel.add(new DoiMatKhau());
            } break;
 
            case "DangXuat": {
-               rootPanel.add(new XacNhanDangXuat());
+
            } break;
 
         
@@ -113,6 +119,9 @@ public class ChuyenManHinhGV {
                 case "jpnMonHoc": {
                     node = new MonHoc();
                 } break;
+                case "jpnHocPhan": {
+                    node = new HocPhan();
+                } break;
 
                 case "jpnHocKi": {
                     node = new HocKi();
@@ -122,12 +131,23 @@ public class ChuyenManHinhGV {
                     node = new LopHoc();
                 } break;
 
+                case "jpnDKHP": {
+                    node = new KiDangKyHocPhan();
+                } break;
+
                 case "jpnDoiMK": {
                     node = new DoiMatKhau();
                 } break;
 
                 case "jpnDangXuat": {
-                    node = new XacNhanDangXuat();
+                    String[] options = {"Chắc chắn", "Huỷ"};
+                    int kq = JOptionPane.showOptionDialog(null, "Bạn có chắn chắc muốn thoát khỏi hệ thống?",
+                            "Nhấn vào lựa chọn của bạn",JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                            null, options, options[0]);
+                    if(kq == 0)
+                    {
+                        System.exit(0);
+                    }
                 } break;
          
             }
