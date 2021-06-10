@@ -7,25 +7,24 @@ import java.util.Set;
 public class HocphanEntity {
     private String maHocPhan;
     private MonhocEntity monHoc;
-
-
     private String giaoVien;
     private String tenPhongHoc;
     private Integer ngayHoc;
     private Integer caHoc;
     private Integer slotToiDa;
 
-    private Set<SinhvienEntity> sinhviens = new HashSet<SinhvienEntity>(0);
+    private Set<PhieuDkEntity> phieus = new HashSet<PhieuDkEntity>(0);
 
-    public HocphanEntity(){
+    public HocphanEntity() {
 
     }
-    public HocphanEntity(String maHocPhan){
+
+    public HocphanEntity(String maHocPhan) {
         this.maHocPhan = maHocPhan;
     }
 
     public HocphanEntity(String maHocPhan, MonhocEntity monHoc, String giaoVien,
-                         String tenPhongHoc, Integer ngayHoc, Integer caHoc, Integer slotToiDa){
+                         String tenPhongHoc, Integer ngayHoc, Integer caHoc, Integer slotToiDa) {
         this.maHocPhan = maHocPhan;
         this.monHoc = monHoc;
         this.giaoVien = giaoVien;
@@ -33,6 +32,14 @@ public class HocphanEntity {
         this.ngayHoc = ngayHoc;
         this.caHoc = caHoc;
         this.slotToiDa = slotToiDa;
+    }
+
+    public Set<PhieuDkEntity> getPhieus() {
+        return phieus;
+    }
+
+    public void setPhieus(Set<PhieuDkEntity> phieus) {
+        this.phieus = phieus;
     }
 
     public String getMaHocPhan() {
@@ -91,11 +98,5 @@ public class HocphanEntity {
         this.slotToiDa = slotToiDa;
     }
 
-    public Set<SinhvienEntity> getSinhviens() {
-        return sinhviens;
-    }
 
-    public void setSinhviens(Set<SinhvienEntity> sinhviens) {
-        this.sinhviens = sinhviens;
-    }
 }

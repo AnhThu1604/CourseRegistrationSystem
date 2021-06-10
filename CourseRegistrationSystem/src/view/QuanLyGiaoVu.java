@@ -1,41 +1,61 @@
-
 package view;
 
 
-import dao.DangKiHPDAO;
-import dao.LopHocDAO;
 import dao.GiaoVuDAO;
-import dao.SinhVienDAO;
-import pojo.LophocEntity;
 import pojo.GiaovuEntity;
-import pojo.SinhvienEntity;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 public class QuanLyGiaoVu extends javax.swing.JPanel {
 
+
+    // Variables declaration - do not modify
+    private javax.swing.JComboBox<String> box1;
+    private javax.swing.JButton btnLuu;
+    private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnXoa;
+    private javax.swing.JButton jButtonSearch;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextFieldSearch;
+    private javax.swing.JTextField txtCMND;
+    private javax.swing.JTextField txtDiaChi;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtMa;
+    private javax.swing.JPasswordField txtMatKhau;
+    private javax.swing.JTextField txtNgaySinh;
+    private javax.swing.JTextField txtTen;
 
     public QuanLyGiaoVu() {
         initComponents();
         loadDanhSach();
 
     }
-    private void loadDanhSach()
-    {
-        DefaultTableModel dtm = new DefaultTableModel();
-        dtm.addColumn("Mã");
-        dtm.addColumn("Họ và tên");
-        dtm.addColumn("Ngày sinh");
-        dtm.addColumn("Địa chỉ");
-        for (GiaovuEntity giaoVu: GiaoVuDAO.getDanhSachGV())
+
+    //Ham load danh sach len bang
+    private void loadDanhSach() {
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        dtm.setRowCount(0);
+        for (GiaovuEntity giaoVu : GiaoVuDAO.getDanhSachGV())
             dtm.addRow(new Object[]{giaoVu.getMa(), giaoVu.getHoVaTen(), giaoVu.getNgaySinh(), giaoVu.getDiaChi()});
-        jTable1.setModel(dtm);
 
         txtMa.setText("");
         txtTen.setText("");
@@ -47,13 +67,15 @@ public class QuanLyGiaoVu extends javax.swing.JPanel {
         box1.setSelectedIndex(0);
     }
 
+    //Ham lay thong tin tu form
     private void getData(GiaovuEntity giaoVu) throws ParseException {
         giaoVu.setHoVaTen(txtTen.getText());
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String date;
         date = txtNgaySinh.getText();
-        if(date.compareTo("") == 0) {
-            date = "0000-00-00";;
+        if (date.compareTo("") == 0) {
+            date = "0000-00-00";
+            ;
         }
         giaoVu.setNgaySinh(format.parse(date));
         giaoVu.setCmnd(txtCMND.getText());
@@ -64,6 +86,7 @@ public class QuanLyGiaoVu extends javax.swing.JPanel {
 
     }
 
+    //Ham set thong tin len form
     private void setData(GiaovuEntity giaoVu) {
         txtMa.setText(giaoVu.getMa());
         txtTen.setText(giaoVu.getHoVaTen());
@@ -72,20 +95,19 @@ public class QuanLyGiaoVu extends javax.swing.JPanel {
         txtCMND.setText(giaoVu.getCmnd());
         txtNgaySinh.setText(giaoVu.getNgaySinh().toString());
 
-        if(giaoVu.getPhai().compareTo("Nam") == 0){
+        if (giaoVu.getPhai().compareTo("Nam") == 0) {
             box1.setSelectedIndex(0);
         }
 
-        if(giaoVu.getPhai().compareTo("Nữ") == 0) {
+        if (giaoVu.getPhai().compareTo("Nữ") == 0) {
             box1.setSelectedIndex(1);
         }
 
         txtEmail.setText(giaoVu.getEmail());
     }
 
-
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">
+
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -120,33 +142,19 @@ public class QuanLyGiaoVu extends javax.swing.JPanel {
         jSeparator3 = new javax.swing.JSeparator();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-                new Object [][] {
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null}
+                new Object[][]{
+
                 },
-                new String [] {
+                new String[]{
                         "Mã", "Họ Và Tên", "Ngày sinh", "Địa chỉ"
                 }
         ) {
-            Class[] types = new Class [] {
+            Class[] types = new Class[]{
                     java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+                return types[columnIndex];
             }
         });
 
@@ -160,7 +168,6 @@ public class QuanLyGiaoVu extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(jTable1);
-
 
 
         jButtonSearch.setText("Tìm kiếm");
@@ -199,7 +206,6 @@ public class QuanLyGiaoVu extends javax.swing.JPanel {
         });
 
 
-
         jLabel1.setText("Thông tin chi tiết");
 
         jLabel2.setText("Mã giáo vụ");
@@ -208,7 +214,7 @@ public class QuanLyGiaoVu extends javax.swing.JPanel {
 
         jLabel4.setText("Mật khẩu");
 
-        box1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
+        box1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Nam", "Nữ"}));
 
 
         btnThem.setText("Thêm");
@@ -375,66 +381,60 @@ public class QuanLyGiaoVu extends javax.swing.JPanel {
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-    }// </editor-fold>
+    }
 
+    //Ham xu ly khi nguoi dung nhan vao tim kiem
     private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {
-        GiaovuEntity giaoVu= GiaoVuDAO.getThongTinGV(jTextFieldSearch.getText());
-        if(giaoVu == null)
-        {
+        GiaovuEntity giaoVu = GiaoVuDAO.getThongTinGV(jTextFieldSearch.getText());
+        if (giaoVu == null) {
             StringBuilder sb = new StringBuilder();
-            sb.append("Không tìm thấy giáo vụ có mã "+ jTextFieldSearch.getText());
+            sb.append("Không tìm thấy giáo vụ có mã " + jTextFieldSearch.getText());
             JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
-                JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.ERROR_MESSAGE);
             loadDanhSach();
-        }else{
+        } else {
             setData(giaoVu);
         }
     }
 
-
-
-
+    //Ham xu ly khi nguoi dung nhan vao them
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) throws ParseException {
         StringBuilder sb = new StringBuilder();
         sb.append("Thêm thông tin giáo vụ không thành công");
-        if(txtMa.getText().compareTo("")!=0) {
+        if (txtMa.getText().compareTo("") != 0) {
             GiaovuEntity giaoVu = new GiaovuEntity(txtMa.getText());
             getData(giaoVu);
             int kq = GiaoVuDAO.addGV(giaoVu);
-            if(kq!=1)
-            {
+            if (kq != 1) {
                 JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
                         JOptionPane.ERROR_MESSAGE);
-            }
-            else{
+            } else {
                 JOptionPane.showMessageDialog(this, "Thêm thành công");
+                loadDanhSach();
             }
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
                     JOptionPane.ERROR_MESSAGE);
         }
-        loadDanhSach();
+
 
     }
 
+    //Ham xu ly khi nguoi dung nhan vao xoa
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {
         StringBuilder sb = new StringBuilder();
         System.out.println(DangNhap.getUsername());
-        if(txtMa.getText().compareTo(DangNhap.getUsername()) == 0)
-        {
+        if (txtMa.getText().compareTo(DangNhap.getUsername()) == 0) {
             sb.append("Tài khoản đang thực hiện trên hệ thống, không thể xoá");
             JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
-                JOptionPane.ERROR_MESSAGE);
-        }
-        else{
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
             int kq = GiaoVuDAO.deleteGV(txtMa.getText());
-            if(kq != 1){
+            if (kq != 1) {
                 sb.append("Xoá tài khoản giáo vụ không thành công");
                 JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
                         JOptionPane.ERROR_MESSAGE);
-            }
-            else{
+            } else {
                 JOptionPane.showMessageDialog(this, "Xoá thành công");
             }
         }
@@ -442,69 +442,36 @@ public class QuanLyGiaoVu extends javax.swing.JPanel {
         loadDanhSach();
     }
 
+    //Ham xu ly khi nguoi dung nhan vao luu
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) throws ParseException {
         StringBuilder sb = new StringBuilder();
         System.out.println(DangNhap.getUsername());
-        if(txtMa.getText().compareTo(DangNhap.getUsername()) == 0)
-        {
+        if (txtMa.getText().compareTo(DangNhap.getUsername()) == 0) {
             sb.append("Tài khoản đang thực hiện trên hệ thống, chỉnh sửa thông tin ở trang này");
             JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
                     JOptionPane.ERROR_MESSAGE);
-        }
-        else{
+        } else {
             GiaovuEntity giaoVu = GiaoVuDAO.getThongTinGV(txtMa.getText());
             getData(giaoVu);
             int kq = GiaoVuDAO.updateThongTinGV(giaoVu);
-            if (kq != 1){
+            if (kq != 1) {
                 sb.append("Chỉnh sửa thông tin không thành công");
                 JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
                         JOptionPane.ERROR_MESSAGE);
-            }
-            else{
+                loadDanhSach();
+            } else {
                 JOptionPane.showMessageDialog(this, "Chỉnh sửa thành công");
             }
         }
 
-        loadDanhSach();
+
     }
 
+    //Ham xu ly khi nguoi dung nhan vao xoa
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) throws ParseException {
         String username = this.jTable1.getValueAt(this.jTable1.getSelectedRow(), 0).toString();
         GiaovuEntity giaoVu = GiaoVuDAO.getThongTinGV(username);
         setData(giaoVu);
     }
 
-
-    // Variables declaration - do not modify
-    private javax.swing.JComboBox<String> box1;
-    private javax.swing.JButton btnLuu;
-    private javax.swing.JButton btnThem;
-    private javax.swing.JButton btnXoa;
-    private javax.swing.JButton jButtonSearch;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextFieldSearch;
-    private javax.swing.JTextField txtCMND;
-    private javax.swing.JTextField txtDiaChi;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtMa;
-    private javax.swing.JPasswordField txtMatKhau;
-    private javax.swing.JTextField txtNgaySinh;
-    private javax.swing.JTextField txtTen;
-    // End of variables declaration
 }

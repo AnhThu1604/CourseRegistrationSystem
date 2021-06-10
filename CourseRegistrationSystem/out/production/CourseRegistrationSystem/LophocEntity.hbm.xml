@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-mapping PUBLIC
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
     <class name="pojo.LophocEntity" table="lophoc" schema="CourseRegistrationSystem">
@@ -9,15 +9,15 @@
             <column name="MaLopHoc" sql-type="varchar(30)" length="30"/>
         </id>
         <property name="tongSv">
-            <column name="TongSV" sql-type="int" />
+            <column name="TongSV" sql-type="int"/>
         </property>
         <property name="tongSvNam">
-            <column name="TongSVNam" sql-type="int" />
+            <column name="TongSVNam" sql-type="int"/>
         </property>
         <property name="tongSvNu">
-            <column name="TongSVNu" sql-type="int" />
+            <column name="TongSVNu" sql-type="int"/>
         </property>
-        <set name="list" inverse="true" lazy="false" fetch="join">
+        <set name="sinhViens" inverse="true" lazy="false" fetch="join">
             <key>
                 <column name="Lop" length="10" not-null="true"></column>
             </key>

@@ -9,16 +9,15 @@ public class DangkiHpEntity {
     private Date ngayKetThuc;
     private HockiEntity hocKi;
 
-    public DangkiHpEntity(){
+    public DangkiHpEntity() {
 
     }
 
-    public DangkiHpEntity(int maDkhp){
+    public DangkiHpEntity(int maDkhp) {
         this.maDkhp = maDkhp;
     }
 
-    public DangkiHpEntity(int maDkhp, Date ngayBatDau, Date ngayKetThuc, HockiEntity hocKi)
-    {
+    public DangkiHpEntity(int maDkhp, Date ngayBatDau, Date ngayKetThuc, HockiEntity hocKi) {
         this.maDkhp = maDkhp;
         this.ngayBatDau = ngayBatDau;
         this.ngayKetThuc = ngayKetThuc;

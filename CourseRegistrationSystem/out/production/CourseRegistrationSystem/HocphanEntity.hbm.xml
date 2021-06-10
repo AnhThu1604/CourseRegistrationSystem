@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-mapping PUBLIC
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
     <class name="pojo.HocphanEntity" table="hocphan" schema="CourseRegistrationSystem">
@@ -10,10 +10,10 @@
         </id>
 
         <property name="giaoVien">
-            <column name="GiaoVien" sql-type="varchar(50)" length="50" />
+            <column name="GiaoVien" sql-type="varchar(50)" length="50"/>
         </property>
         <property name="tenPhongHoc">
-            <column name="TenPhongHoc" sql-type="varchar(50)" length="50" />
+            <column name="TenPhongHoc" sql-type="varchar(50)" length="50"/>
         </property>
         <property name="ngayHoc">
             <column name="NgayHoc" sql-type="int" not-null="true"/>
@@ -22,12 +22,19 @@
             <column name="CaHoc" sql-type="int" not-null="true"/>
         </property>
         <property name="slotToiDa">
-            <column name="SlotToiDa" sql-type="int" />
+            <column name="SlotToiDa" sql-type="int"/>
         </property>
         <many-to-one name="monHoc" class="pojo.MonhocEntity"
                      fetch="select" lazy="false">
             <column name="MaMonHoc" length="45"/>
         </many-to-one>
+        <set name="phieus" inverse="true" fetch="join" lazy="false">
+            <key>
+                <column name="MaHocPhan" length="20" not-null="true"/>
+            </key>
+            <one-to-many class="pojo.PhieuDkEntity"/>
+        </set>
+
 
     </class>
 </hibernate-mapping>

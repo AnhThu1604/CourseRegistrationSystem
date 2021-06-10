@@ -4,15 +4,15 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import pojo.GiaovuEntity;
-import pojo.LophocEntity;
 import pojo.SinhvienEntity;
 import util.HibernateUtil;
 
 import javax.persistence.Query;
 import java.util.List;
+
 public class SinhVienDAO {
 
+    /*----------------------Tham khao file huong dan-----------------------*/
     public static List<SinhvienEntity> getDanhSachSV() {
         List<SinhvienEntity> ds = null;
         SessionFactory factory = HibernateUtil.getSessionFactory();
@@ -103,7 +103,9 @@ public class SinhVienDAO {
         }
         return 1;
     }
+    /*---------------------------------------------------------------------*/
 
+    //Ham tra ve sinh vien dang nhap vao he thong
     public static SinhvienEntity xacThucTK(String ma, String mk) {
         SinhvienEntity sinhVien = getThongTinSV(ma);
         if (sinhVien == null || sinhVien.getMatKhau() == null) {
@@ -114,7 +116,5 @@ public class SinhVienDAO {
         }
         return null;
     }
-
-
 
 }

@@ -1,6 +1,5 @@
 package pojo;
 
-import java.time.Year;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
@@ -16,14 +15,14 @@ public class HockiEntity {
     private Set<MonhocEntity> mons = new HashSet<MonhocEntity>(0);
     private Set<DangkiHpEntity> dks = new HashSet<DangkiHpEntity>(0);
 
-    public HockiEntity(){
+    public HockiEntity() {
     }
 
-    public HockiEntity(int maHocKi){
+    public HockiEntity(int maHocKi) {
         this.maHocKi = maHocKi;
     }
 
-    public HockiEntity(int maHocKi, String tenHocKi, Date ngayBatDau, Date ngayKetThuc){
+    public HockiEntity(int maHocKi, String tenHocKi, Date ngayBatDau, Date ngayKetThuc) {
         this.maHocKi = maHocKi;
         this.tenHocKi = tenHocKi;
         this.ngayBatDau = ngayBatDau;

@@ -1,13 +1,8 @@
-
 package view;
 
 
-import dao.GiaoVuDAO;
 import dao.HocKiDAO;
-import dao.LopHocDAO;
-import pojo.GiaovuEntity;
 import pojo.HockiEntity;
-import pojo.LophocEntity;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -19,6 +14,29 @@ import java.util.Calendar;
 public class HocKi extends javax.swing.JPanel {
     //Ma dang thao tac chinh sua, xoa
     private int maHK;
+    // Variables declaration - do not modify
+    private javax.swing.JButton btnLuu;
+    private javax.swing.JButton btnSet;
+    private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnXoa;
+    private javax.swing.JComboBox<String> boxHK;
+    private javax.swing.JTextField txtNgayBD;
+    private javax.swing.JTextField txtNgayKT;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField txtNamHoc;
+
+    public HocKi() {
+        initComponents();
+        loadDanhSach();
+    }
 
     public int getMaHK() {
         return maHK;
@@ -28,29 +46,15 @@ public class HocKi extends javax.swing.JPanel {
         this.maHK = maHK;
     }
 
-
-
-    public HocKi() {
-        initComponents();
-        loadDanhSach();
-    }
-
     private void loadDanhSach() {
-        DefaultTableModel dtm = new DefaultTableModel();
-        dtm.addColumn("Mã học kì");
-        dtm.addColumn("Tên học kì");
-        dtm.addColumn("Năm học");
-        dtm.addColumn("Ngày bắt đầu");
-        dtm.addColumn("Ngày kết thúc");
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        dtm.setRowCount(0);
         for (HockiEntity hocKi : HocKiDAO.getDanhSachHK())
             dtm.addRow(new Object[]{hocKi.getMaHocKi(), hocKi.getTenHocKi(), hocKi.getNamHoc(),
                     hocKi.getNgayBatDau(), hocKi.getNgayKetThuc()});
-
-        jTable1.setModel(dtm);
         txtNamHoc.setText("");
         txtNgayBD.setText("");
         txtNgayKT.setText("");
-
     }
 
     private void getData(HockiEntity hocKi) throws ParseException {
@@ -118,10 +122,7 @@ public class HocKi extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null}
+
                 },
                 new String[]{
                         "Mã học kì", "Tên học kì", "Năm học", "Ngày bắt đầu", "Ngày kết thúc"
@@ -267,8 +268,6 @@ public class HocKi extends javax.swing.JPanel {
         );
     }// </editor-fold>
 
-
-
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {
         StringBuilder sb = new StringBuilder();
         sb.append("Thêm thông tin học kì không thành công");
@@ -282,7 +281,7 @@ public class HocKi extends javax.swing.JPanel {
         if (kq != 1) {
             JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
                     JOptionPane.ERROR_MESSAGE);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Thêm thành công");
         }
         loadDanhSach();
@@ -290,15 +289,20 @@ public class HocKi extends javax.swing.JPanel {
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Xoá học kì không thành công ");
 
-        int kq = HocKiDAO.deleteHK(maHK);
-        if (kq != 1) {
+        if (maHK != HocKiDAO.getThongTinHKHT().getMaHocKi()) {
+            sb.append("Xoá học kì không thành công ");
+            int kq = HocKiDAO.deleteHK(maHK);
+            if (kq != 1) {
+                JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Xoá thành công");
+            }
+        } else {
+            sb.append("Không được xoá học kì hiện tại ");
             JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
                     JOptionPane.ERROR_MESSAGE);
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "Xoá thành công");
         }
         loadDanhSach();
     }
@@ -311,8 +315,7 @@ public class HocKi extends javax.swing.JPanel {
         if (kq != 1) {
             JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
                     JOptionPane.ERROR_MESSAGE);
-        }else
-        {
+        } else {
             JOptionPane.showMessageDialog(this, "Luu thanh cong");
         }
         loadDanhSach();
@@ -320,12 +323,12 @@ public class HocKi extends javax.swing.JPanel {
 
     private void btnSetActionPerformed(java.awt.event.ActionEvent evt) {
         HockiEntity hocKi = HocKiDAO.getThongTinHK(maHK);
-        if(hocKi == null){
+        if (hocKi == null) {
             StringBuilder sb = new StringBuilder();
             sb.append("Học kì chưa được chọn");
             JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
                     JOptionPane.ERROR_MESSAGE);
-        }else {
+        } else {
             if (HocKiDAO.getThongTinHKHT() != null) {
                 HockiEntity hk = HocKiDAO.getThongTinHKHT();
                 hk.setKiHienTai(0);
@@ -344,25 +347,5 @@ public class HocKi extends javax.swing.JPanel {
         HockiEntity hocKi = HocKiDAO.getThongTinHK(maHK);
         setData(hocKi);
     }
-
-
-    // Variables declaration - do not modify
-    private javax.swing.JButton btnLuu;
-    private javax.swing.JButton btnSet;
-    private javax.swing.JButton btnThem;
-    private javax.swing.JButton btnXoa;
-    private javax.swing.JComboBox<String> boxHK;
-    private javax.swing.JTextField txtNgayBD;
-    private javax.swing.JTextField txtNgayKT;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField txtNamHoc;
 
 }

@@ -3,11 +3,13 @@ package view;
 
 import dao.HocKiDAO;
 import dao.MonHocDAO;
+import pojo.HockiEntity;
 import pojo.MonhocEntity;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.text.ParseException;
+import java.util.Iterator;
 
 public class MonHoc extends javax.swing.JPanel {
 
@@ -28,32 +30,37 @@ public class MonHoc extends javax.swing.JPanel {
     private javax.swing.JTextField txtMaMH;
     private javax.swing.JTextField txtSoTinChi;
     private javax.swing.JTextField txtTenMH;
+
     public MonHoc() {
         initComponents();
         loadDanhSach();
     }
 
+    //Ham load danh sach
     private void loadDanhSach() {
-        DefaultTableModel dtm = new DefaultTableModel();
-        dtm.addColumn("Mã học kì");
-        dtm.addColumn("Tên học kì");
-        dtm.addColumn("Năm học");
-
-        for (MonhocEntity monHoc : MonHocDAO.getDanhSachMH())
-            dtm.addRow(new Object[]{monHoc.getMaMonHoc(), monHoc.getTenMonHoc(), monHoc.getSoTinChi()});
-
-        jTable1.setModel(dtm);
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        dtm.setRowCount(0);
+        HockiEntity hocKi = HocKiDAO.getThongTinHKHT();
+        if (hocKi != null) {
+            Iterator<MonhocEntity> list = hocKi.getMons().iterator();
+            while (list.hasNext()) {
+                MonhocEntity monHoc = list.next();
+                dtm.addRow(new Object[]{monHoc.getMaMonHoc(), monHoc.getTenMonHoc(), monHoc.getSoTinChi()});
+            }
+        }
         txtMaMH.setText("");
         txtTenMH.setText("");
         txtSoTinChi.setText("");
 
     }
 
+    //Ham lay thong tin tu form
     private void getData(MonhocEntity monHoc) throws ParseException {
         monHoc.setTenMonHoc(txtTenMH.getText().toString());
         monHoc.setSoTinChi(Integer.parseInt(txtSoTinChi.getText()));
     }
 
+    //Ham set thong tin len form
     private void setData(MonhocEntity monHoc) {
         txtMaMH.setText(monHoc.getMaMonHoc());
         txtTenMH.setText(monHoc.getTenMonHoc());
@@ -61,7 +68,7 @@ public class MonHoc extends javax.swing.JPanel {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">
+
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
@@ -84,10 +91,6 @@ public class MonHoc extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
-                        {null, null, null},
-                        {null, null, null},
-                        {null, null, null},
-                        {null, null, null}
                 },
                 new String[]{
                         "Mã môn học", "Tên môn học", "Số tín chỉ"
@@ -117,30 +120,6 @@ public class MonHoc extends javax.swing.JPanel {
         jLabel3.setText("Tên môn học");
 
         jLabel4.setText("Số tín chỉ");
-
-        txtMaMH.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMaMHActionPerformed(evt);
-            }
-        });
-
-        txtSoTinChi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSoTinChiActionPerformed(evt);
-            }
-        });
-
-        txtTenMH.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTenMHActionPerformed(evt);
-            }
-        });
-
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
-            }
-        });
 
         btnTim.setText("Tìm");
         btnTim.addActionListener(new java.awt.event.ActionListener() {
@@ -250,24 +229,10 @@ public class MonHoc extends javax.swing.JPanel {
                                         .addComponent(btnXoa))
                                 .addContainerGap(57, Short.MAX_VALUE))
         );
-    }// </editor-fold>
-
-    private void txtMaMHActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
     }
 
-    private void txtSoTinChiActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
 
-    private void txtTenMHActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
+    //Ham xu ly khi nguoi dung nhan vao tim kiem
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {
         MonhocEntity monHoc = MonHocDAO.getThongTinMH(jTextField4.getText().toString());
         if (monHoc == null) {
@@ -281,6 +246,7 @@ public class MonHoc extends javax.swing.JPanel {
         }
     }
 
+    //Ham xu ly khi nguoi dung nhan vao luu thong tin
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) throws ParseException {
         StringBuilder sb = new StringBuilder();
         MonhocEntity monHoc = MonHocDAO.getThongTinMH(txtMaMH.getText());
@@ -290,6 +256,7 @@ public class MonHoc extends javax.swing.JPanel {
             int kq = MonHocDAO.updateThongTinMH(monHoc);
             if (kq == 1) {
                 JOptionPane.showMessageDialog(this, "Chỉnh sửa thành công");
+                loadDanhSach();
             } else {
                 JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
                         JOptionPane.ERROR_MESSAGE);
@@ -297,9 +264,10 @@ public class MonHoc extends javax.swing.JPanel {
         } else {
             sb.append("Môn học chưa có trong danh sách");
         }
-        loadDanhSach();
+
     }
 
+    //Ham xu ly khi nguoi dung nhan vao them
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) throws ParseException {
         StringBuilder sb = new StringBuilder();
         if (txtMaMH.getText() != null) {
@@ -312,6 +280,7 @@ public class MonHoc extends javax.swing.JPanel {
                     sb.append("Thêm không thành công");
                     JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
                             JOptionPane.ERROR_MESSAGE);
+
                 } else {
                     JOptionPane.showMessageDialog(this, "Thêm thành công");
                 }
@@ -328,6 +297,7 @@ public class MonHoc extends javax.swing.JPanel {
         loadDanhSach();
     }
 
+    //Ham xu ly khi nguoi dung nhan vao xoa
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {
         int kq = MonHocDAO.deleteMH(txtMaMH.getText());
         StringBuilder sb = new StringBuilder();
@@ -335,13 +305,13 @@ public class MonHoc extends javax.swing.JPanel {
         if (kq == 0) {
             JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
                     JOptionPane.ERROR_MESSAGE);
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "Lưu thành công");
+        } else {
+            JOptionPane.showMessageDialog(this, "Xoá thành công");
         }
         loadDanhSach();
     }
 
+    //Ham xu ly khi nguoi dung nhan vao bang danh sach
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) throws ParseException {
         String maMonHoc = this.jTable1.getValueAt(this.jTable1.getSelectedRow(), 0).toString();
         MonhocEntity monHoc = MonHocDAO.getThongTinMH(maMonHoc);

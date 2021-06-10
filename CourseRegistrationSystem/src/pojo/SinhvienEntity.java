@@ -16,26 +16,18 @@ public class SinhvienEntity {
     private String matKhau;
     private String email;
     private int maQuyenDn;
-    private Set<HocphanEntity> hocphans = new HashSet<HocphanEntity>(0);
+    private Set<PhieuDkEntity> phieus = new HashSet<PhieuDkEntity>(0);
 
-    public Set<HocphanEntity> getHocphans() {
-        return hocphans;
-    }
-
-    public void setHocphans(Set<HocphanEntity> hocphans) {
-        this.hocphans = hocphans;
-    }
-
-    public SinhvienEntity(){
+    public SinhvienEntity() {
 
     }
 
-    public SinhvienEntity(String maSinhVien){
+    public SinhvienEntity(String maSinhVien) {
         this.maSinhVien = maSinhVien;
     }
 
     public SinhvienEntity(String maSinhVien, String hoVaTen, String phai, Date ngaySinh, String diaChi,
-                        String cmnd, LophocEntity lop, String matKhau, String email){
+                          String cmnd, LophocEntity lop, String matKhau, String email) {
         this.maSinhVien = maSinhVien;
         this.hoVaTen = hoVaTen;
         this.phai = phai;
@@ -45,6 +37,14 @@ public class SinhvienEntity {
         this.lop = lop;
         this.matKhau = matKhau;
         this.email = email;
+    }
+
+    public Set<PhieuDkEntity> getPhieus() {
+        return phieus;
+    }
+
+    public void setPhieus(Set<PhieuDkEntity> phieus) {
+        this.phieus = phieus;
     }
 
     public String getMaSinhVien() {
@@ -95,12 +95,12 @@ public class SinhvienEntity {
         this.cmnd = cmnd;
     }
 
-    public void setLop(LophocEntity lop) {
-        this.lop = lop;
-    }
-
     public LophocEntity getLop() {
         return lop;
+    }
+
+    public void setLop(LophocEntity lop) {
+        this.lop = lop;
     }
 
     public String getMatKhau() {

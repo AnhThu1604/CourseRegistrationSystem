@@ -1,4 +1,3 @@
-
 package view;
 
 import dao.GiaoVuDAO;
@@ -10,13 +9,24 @@ import javax.swing.*;
 
 public class DoiMatKhau extends javax.swing.JPanel {
 
+
+    private javax.swing.JButton btnXacNhan;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JPasswordField txtMKCu;
+    private javax.swing.JPasswordField txtMKMoi;
+    private javax.swing.JPasswordField txtNhapLai;
+
     public DoiMatKhau() {
         initComponents();
     }
 
-
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">
+
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -35,24 +45,6 @@ public class DoiMatKhau extends javax.swing.JPanel {
         jLabel3.setText("Mật khẩu mới");
 
         jLabel4.setText("Nhập lại");
-
-        txtMKCu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMKCuActionPerformed(evt);
-            }
-        });
-
-        txtNhapLai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNhapLaiActionPerformed(evt);
-            }
-        });
-
-        txtMKMoi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMKMoiActionPerformed(evt);
-            }
-        });
 
         btnXacNhan.setText("Xác nhận");
         btnXacNhan.addActionListener(new java.awt.event.ActionListener() {
@@ -128,19 +120,8 @@ public class DoiMatKhau extends javax.swing.JPanel {
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(17, Short.MAX_VALUE))
         );
-    }// </editor-fold>
-
-    private void txtMKCuActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
     }
 
-    private void txtNhapLaiActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void txtMKMoiActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
 
     private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {
         int maNguoiDung = DangNhap.getIduser();
@@ -158,18 +139,14 @@ public class DoiMatKhau extends javax.swing.JPanel {
                     sb.append("Mật khẩu nhập lại không đúng");
                     JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
                             JOptionPane.ERROR_MESSAGE);
-                }
-                else {
+                } else {
                     giaoVu.setMatKhau(txtMKMoi.getText());
                     int kq = GiaoVuDAO.updateThongTinGV(giaoVu);
-                    if(kq == 1) {
-                        System.out.println("Thanh Cong");
+                    if (kq == 1) {
+                        JOptionPane.showMessageDialog(this,"Đổi mật khẩu thành công");
                     }
                 }
             }
-
-
-
         } else {
             {
                 StringBuilder sb = new StringBuilder();
@@ -183,12 +160,10 @@ public class DoiMatKhau extends javax.swing.JPanel {
                         sb.append("Mật khẩu nhập lại không đúng");
                         JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
                                 JOptionPane.ERROR_MESSAGE);
-                    }
-                    else
-                    {
+                    } else {
                         sinhVien.setMatKhau(txtMKMoi.getText());
                         int kq = SinhVienDAO.updateThongTinSV(sinhVien);
-                        if(kq == 1) {
+                        if (kq == 1) {
                             System.out.println("Thanh Cong");
                         }
                     }
@@ -199,20 +174,4 @@ public class DoiMatKhau extends javax.swing.JPanel {
         }
     }
 
-
-
-
-    // Variables declaration - do not modify
-    private javax.swing.JButton btnXacNhan;
-
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JPasswordField txtMKCu;
-    private javax.swing.JPasswordField txtMKMoi;
-    private javax.swing.JPasswordField txtNhapLai;
-    // End of variables declaration
 }

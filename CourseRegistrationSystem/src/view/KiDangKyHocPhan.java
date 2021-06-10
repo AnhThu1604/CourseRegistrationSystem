@@ -1,4 +1,3 @@
-
 package view;
 
 import dao.DangKiHPDAO;
@@ -14,40 +13,47 @@ import java.text.SimpleDateFormat;
 
 public class KiDangKyHocPhan extends javax.swing.JPanel {
 
+    private javax.swing.JButton btnThem;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTextField txtBatDau;
+    private javax.swing.JTextField txtKetThuc;
+
     public KiDangKyHocPhan() {
         initComponents();
         loadDanhSach();
     }
 
-    public void loadDanhSach()
-    {
-        DefaultTableModel dtm = new DefaultTableModel();
-        dtm.addColumn("Mã học kì");
-        dtm.addColumn("Thời gian bắt đầu");
-        dtm.addColumn("Thời gian kết thúc");
-
-        for (DangkiHpEntity dangKi: DangKiHPDAO.getDanhSachTGDK())
+    //Ham load danh sach cac ki dang ki hoc phan
+    public void loadDanhSach() {
+        DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
+        dtm.setRowCount(0);
+        for (DangkiHpEntity dangKi : DangKiHPDAO.getDanhSachTGDK())
             dtm.addRow(new Object[]{dangKi.getHocKi().getMaHocKi(), dangKi.getNgayBatDau(), dangKi.getNgayKetThuc()});
-        jTable2.setModel(dtm);
-
         txtBatDau.setText("");
         txtKetThuc.setText("");
     }
+
+    //Ham lay thong tin tu form
     private void getData(DangkiHpEntity dangKi) throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String ngayBD = txtBatDau.getText();
         String ngayKT = txtKetThuc.getText();
         if (ngayBD.compareTo("") == 0) {
-            ngayBD =  java.time.LocalDate.now().toString();;
+            ngayBD = java.time.LocalDate.now().toString();
         }
         if (ngayKT.compareTo("") == 0) {
-            ngayKT =  java.time.LocalDate.now().toString();;
+            ngayKT = java.time.LocalDate.now().toString();
         }
         dangKi.setNgayBatDau(format.parse(ngayBD));
         dangKi.setNgayKetThuc(format.parse(ngayKT));
-
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
@@ -86,29 +92,26 @@ public class KiDangKyHocPhan extends javax.swing.JPanel {
         });
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
-                new Object [][] {
-                        {null, null, null},
-                        {null, null, null},
-                        {null, null, null},
-                        {null, null, null}
+                new Object[][]{
+
                 },
-                new String [] {
+                new String[]{
                         "Mã kì", "Thời gian bắt đầu", "Thời gian kết thúc"
                 }
         ) {
-            Class[] types = new Class [] {
+            Class[] types = new Class[]{
                     java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean [] {
+            boolean[] canEdit = new boolean[]{
                     true, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+                return types[columnIndex];
             }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         jScrollPane2.setViewportView(jTable2);
@@ -173,44 +176,29 @@ public class KiDangKyHocPhan extends javax.swing.JPanel {
         );
     }// </editor-fold>
 
-
-
+    //Ham xu ly khi nguoi dung nhan vao them
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) throws ParseException {//GEN-FIRST:event_btnThemActionPerformed
         StringBuilder sb = new StringBuilder();
         HockiEntity hocKiHT = HocKiDAO.getThongTinHKHT();
-        if(hocKiHT != null) {
+        //Kiem tra hoc ki hien tai da duoc set chua
+        if (hocKiHT != null) {
             DangkiHpEntity dangKi = new DangkiHpEntity();
             dangKi.setHocKi(hocKiHT);
             getData(dangKi);
             int kq = DangKiHPDAO.addTGDK(dangKi);
-            if(kq == 0){
+            if (kq == 0) {
                 sb.append("Thêm kì đăng kí học phần không thành công");
                 JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
                         JOptionPane.ERROR_MESSAGE);
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "Thêm thành công");
             }
-        }
-        else{
+        } else {
 
             sb.append("Chưa set học kì hiện tại. Vui lòng set lại!");
             JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
                     JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_btnThemActionPerformed
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnThem;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField txtBatDau;
-    private javax.swing.JTextField txtKetThuc;
-    // End of variables declaration//GEN-END:variables
+        loadDanhSach();
+    }
 }

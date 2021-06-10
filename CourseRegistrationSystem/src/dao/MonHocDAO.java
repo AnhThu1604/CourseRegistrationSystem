@@ -4,21 +4,18 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import pojo.HockiEntity;
-import pojo.HocphanEntity;
 import pojo.MonhocEntity;
-import pojo.SinhvienEntity;
 import util.HibernateUtil;
 
 import javax.persistence.Query;
-import java.util.Iterator;
 import java.util.List;
-public class MonHocDAO {
 
-    public static List<MonhocEntity> getDanhSachMH(){
+public class MonHocDAO {
+    /*----------------------Tham khao file huong dan-----------------------*/
+    public static List<MonhocEntity> getDanhSachMH() {
         List<MonhocEntity> ds = null;
-        SessionFactory factory= HibernateUtil.getSessionFactory();
-        Session session=factory.openSession();
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
         try {
             String hql = "select mh from MonhocEntity mh";
             Query query = session.createQuery(hql);
@@ -33,16 +30,15 @@ public class MonHocDAO {
         return ds;
     }
 
-    public static MonhocEntity getThongTinMH(String maMonHoc){
+    public static MonhocEntity getThongTinMH(String maMonHoc) {
         MonhocEntity mh = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        try{
+        try {
             mh = (MonhocEntity) session.get(MonhocEntity.class, maMonHoc);
 
-        }
-        catch (HibernateException ex){
+        } catch (HibernateException ex) {
             System.err.println(ex);
-        }finally {
+        } finally {
             session.close();
         }
         return mh;
@@ -90,7 +86,7 @@ public class MonHocDAO {
     public static int deleteMH(String maMonHoc) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         MonhocEntity mh = MonHocDAO.getThongTinMH(maMonHoc);
-        if(mh == null){
+        if (mh == null) {
             return 0;
         }
         Transaction transaction = null;
@@ -106,8 +102,7 @@ public class MonHocDAO {
         }
         return 1;
     }
-
-
+    /*---------------------------------------------------------------------*/
 
 }
 

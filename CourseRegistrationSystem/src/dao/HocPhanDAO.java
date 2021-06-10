@@ -9,12 +9,14 @@ import util.HibernateUtil;
 
 import javax.persistence.Query;
 import java.util.List;
+
 public class HocPhanDAO {
 
-    public static List<HocphanEntity> getDanhSachHP(){
+    /*----------------------Tham khao file huong dan-----------------------*/
+    public static List<HocphanEntity> getDanhSachHP() {
         List<HocphanEntity> ds = null;
-        SessionFactory factory= HibernateUtil.getSessionFactory();
-        Session session=factory.openSession();
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
         try {
             String hql = "select HP from HocphanEntity HP";
             Query query = session.createQuery(hql);
@@ -29,16 +31,15 @@ public class HocPhanDAO {
         return ds;
     }
 
-    public static HocphanEntity getThongTinHP(String ma){
+    public static HocphanEntity getThongTinHP(String ma) {
         HocphanEntity HP = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        try{
+        try {
             HP = (HocphanEntity) session.get(HocphanEntity.class, ma);
 
-        }
-        catch (HibernateException ex){
+        } catch (HibernateException ex) {
             System.err.println(ex);
-        }finally {
+        } finally {
             session.close();
         }
         return HP;
@@ -86,7 +87,7 @@ public class HocPhanDAO {
     public static int deleteHP(String ma) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         HocphanEntity sv = HocPhanDAO.getThongTinHP(ma);
-        if(sv == null){
+        if (sv == null) {
             return 0;
         }
         Transaction transaction = null;
@@ -102,4 +103,5 @@ public class HocPhanDAO {
         }
         return 1;
     }
+    /*---------------------------------------------------------------------*/
 }

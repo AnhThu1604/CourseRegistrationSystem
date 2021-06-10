@@ -14,16 +14,16 @@ public class GiaovuEntity {
     private String email;
     private int maQuyenDn;
 
-    public GiaovuEntity(){
+    public GiaovuEntity() {
 
     }
 
-    public GiaovuEntity(String ma){
+    public GiaovuEntity(String ma) {
         this.ma = ma;
     }
 
     public GiaovuEntity(String ma, String hoVaTen, String phai, Date ngaySinh, String diaChi,
-                        String cmnd, String matKhau, String email){
+                        String cmnd, String matKhau, String email) {
         this.ma = ma;
         this.hoVaTen = hoVaTen;
         this.phai = phai;

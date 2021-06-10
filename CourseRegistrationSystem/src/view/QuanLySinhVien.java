@@ -14,11 +14,45 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 public class QuanLySinhVien extends javax.swing.JPanel {
+
+    // Variables declaration - do not modify
+    private javax.swing.JComboBox<String> box;
+    private javax.swing.JComboBox<String> box1;
+    private javax.swing.JButton btnLuu;
+    private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnXoa;
+    private javax.swing.JButton jButtonSearch;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTextField jTextFieldSearch;
+    private javax.swing.JTextField txtCMND;
+    private javax.swing.JTextField txtDiaChi;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtMa;
+    private javax.swing.JTextField txtNgaySinh;
+    private javax.swing.JTextField txtTen;
 
     public QuanLySinhVien() {
         initComponents();
@@ -26,27 +60,26 @@ public class QuanLySinhVien extends javax.swing.JPanel {
         loadDanhSach();
 
     }
-    private void loadDanhSach()
-    {
-        DefaultTableModel dtm = new DefaultTableModel();
-        dtm.addColumn("Mã");
-        dtm.addColumn("Họ và tên");
-        dtm.addColumn("Ngày sinh");
-        dtm.addColumn("Địa chỉ");
-        String lop = box.getItemAt(box.getSelectedIndex());
-        if(lop == null){
-            for(SinhvienEntity sinhVien:SinhVienDAO.getDanhSachSV())
-                dtm.addRow(new Object[]{sinhVien.getMaSinhVien(), sinhVien.getHoVaTen(), sinhVien.getNgaySinh(), sinhVien.getDiaChi()});
-        }else{
-        LophocEntity lopHoc = LopHocDAO.getThongTinLH(lop);
-        Iterator<SinhvienEntity> list = lopHoc.getList().iterator();
-        while (list.hasNext()) {
-            SinhvienEntity sinhVien = list.next();
-            dtm.addRow(new Object[]{sinhVien.getMaSinhVien(), sinhVien.getHoVaTen(), sinhVien.getNgaySinh(), sinhVien.getDiaChi()});
-        }
-        }
-        jTable2.setModel(dtm);
 
+    //Ham load danh sach sinh vien theo lop
+    private void loadDanhSach() {
+        DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
+        //Lay lop hoc tu box
+        String lop = box.getItemAt(box.getSelectedIndex());
+        if (lop == null) {
+            dtm.setRowCount(0);
+            for (SinhvienEntity sinhVien : SinhVienDAO.getDanhSachSV())
+                dtm.addRow(new Object[]{sinhVien.getMaSinhVien(), sinhVien.getHoVaTen(), sinhVien.getNgaySinh(), sinhVien.getDiaChi()});
+        } else {
+            dtm.setRowCount(0);
+            //Lay danh sach sinh vien tu lop hoc
+            LophocEntity lopHoc = LopHocDAO.getThongTinLH(lop);
+            Iterator<SinhvienEntity> list = lopHoc.getSinhViens().iterator();
+            while (list.hasNext()) {
+                SinhvienEntity sinhVien = list.next();
+                dtm.addRow(new Object[]{sinhVien.getMaSinhVien(), sinhVien.getHoVaTen(), sinhVien.getNgaySinh(), sinhVien.getDiaChi()});
+            }
+        }
         txtMa.setText("");
         txtTen.setText("");
         txtNgaySinh.setText("");
@@ -57,23 +90,25 @@ public class QuanLySinhVien extends javax.swing.JPanel {
 
     }
 
-    private void loadClass(){
+    //Ham lay ra danh sach cac lop hoc
+    private void loadClass() {
         List<LophocEntity> ds = LopHocDAO.getDanhSachLH();
         if (ds == null)
             return;
-        for(int i=0; i<ds.size(); i++){
+        for (int i = 0; i < ds.size(); i++) {
             box.addItem(ds.get(i).getMaLopHoc());
         }
 
     }
 
+    //Ham lay thong tin tu form
     private void getData(SinhvienEntity sinhVien) throws ParseException {
         StringBuilder sb = new StringBuilder();
         sinhVien.setHoVaTen(txtTen.getText());
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String date;
         date = txtNgaySinh.getText();
-        if(date.compareTo("") == 0) {
+        if (date.compareTo("") == 0) {
             date = "0000-00-00";
         }
         sinhVien.setNgaySinh(format.parse(date));
@@ -84,6 +119,7 @@ public class QuanLySinhVien extends javax.swing.JPanel {
         sinhVien.setPhai(box1.getItemAt(box1.getSelectedIndex()));
     }
 
+    //Ham set cac thong tin len form
     private void setData(SinhvienEntity sinhVien) {
         txtMa.setText(sinhVien.getMaSinhVien());
         txtTen.setText(sinhVien.getHoVaTen());
@@ -92,17 +128,15 @@ public class QuanLySinhVien extends javax.swing.JPanel {
         txtCMND.setText(sinhVien.getCmnd());
         txtNgaySinh.setText(sinhVien.getNgaySinh().toString());
 
-        if(sinhVien.getPhai().compareTo("Nam") == 0){
+        if (sinhVien.getPhai().compareTo("Nam") == 0) {
             box1.setSelectedIndex(0);
         }
 
-        if(sinhVien.getPhai().compareTo("Nữ") == 0) {
+        if (sinhVien.getPhai().compareTo("Nữ") == 0) {
             box1.setSelectedIndex(1);
         }
         txtEmail.setText(sinhVien.getEmail());
     }
-
-
 
     private void initComponents() {
 
@@ -147,29 +181,21 @@ public class QuanLySinhVien extends javax.swing.JPanel {
             }
         });
 
-        jTextFieldSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldSearchActionPerformed(evt);
-            }
-        });
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
-                new Object [][] {
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null}
+                new Object[][]{
+
                 },
-                new String [] {
+                new String[]{
                         "Mã sinh viên", "Họ và tên", "Ngày sinh", "Địa chỉ"
                 }
         ) {
-            Class[] types = new Class [] {
+            Class[] types = new Class[]{
                     java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+                return types[columnIndex];
             }
         });
         jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -212,12 +238,7 @@ public class QuanLySinhVien extends javax.swing.JPanel {
                         .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        box1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
-        box1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                box1ActionPerformed(evt);
-            }
-        });
+        box1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Nam", "Nữ"}));
 
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
@@ -404,7 +425,7 @@ public class QuanLySinhVien extends javax.swing.JPanel {
 
         jLabel41.setText("Lớp học");
 
-        box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {  }));
+        box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{}));
         box.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boxActionPerformed(evt);
@@ -448,45 +469,45 @@ public class QuanLySinhVien extends javax.swing.JPanel {
         );
     }// </editor-fold>
 
+    //Ham xu ly khi nguoi dung nhan vao tim kiem
     private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {
         SinhvienEntity sinhVien = null;
         String lop = box.getItemAt(box.getSelectedIndex()).toString();
         LophocEntity lopHoc = LopHocDAO.getThongTinLH(lop);
-        Iterator<SinhvienEntity> list = lopHoc.getList().iterator();
+        Iterator<SinhvienEntity> list = lopHoc.getSinhViens().iterator();
         while (list.hasNext()) {
             sinhVien = list.next();
-            if(sinhVien.getMaSinhVien().compareTo(jTextFieldSearch.getText().toString())==0){
+            if (sinhVien.getMaSinhVien().compareTo(jTextFieldSearch.getText().toString()) == 0) {
                 setData(sinhVien);
                 return;
             }
         }
-        if(txtMa.getText() == null) {
-            StringBuilder sb = new StringBuilder();
-            sb.append("Không tìm thấy sv có mã "+ jTextFieldSearch.getText());
+        StringBuilder sb = new StringBuilder();
+        sb.append("Không tìm thấy sinh viên có mã " + jTextFieldSearch.getText());
+        JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
+                JOptionPane.ERROR_MESSAGE);
+        if (txtMa.getText() == null) {
+            sb.append("Vui lòng nhập mã sinh viên cần tìm" + jTextFieldSearch.getText());
             JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
                     JOptionPane.ERROR_MESSAGE);
             loadDanhSach();
         }
     }
 
-    private void jTextFieldSearchActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
     private void boxActionPerformed(java.awt.event.ActionEvent evt) {
         loadDanhSach();
     }
 
+    //Ham xu ly khi nguoi dung nhan vao them
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) throws ParseException {
         StringBuilder sb = new StringBuilder();
         String maLopHoc = box.getItemAt(box.getSelectedIndex());
-
-        if(maLopHoc == null) {
+        //Kiem tra lop hoc
+        if (maLopHoc == null) {
             sb.append("Lớp học không được rỗng");
             JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
                     JOptionPane.ERROR_MESSAGE);
-        }
-        else {
+        } else {
             LophocEntity lopHoc = LopHocDAO.getThongTinLH(maLopHoc);
             if (txtMa.getText().compareTo("") != 0) {
                 SinhvienEntity sinhVien = new SinhvienEntity(txtMa.getText());
@@ -495,7 +516,7 @@ public class QuanLySinhVien extends javax.swing.JPanel {
                 int kq = SinhVienDAO.addSV(sinhVien);
                 if (kq == 1) {
                     JOptionPane.showMessageDialog(this, "Thêm thành công");
-                    LopHocDAO.ThemSV(lopHoc, box1.getItemAt(box1.getSelectedIndex()));
+                    loadDanhSach();
                 } else {
                     sb.append("Thêm không thành công");
                     JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
@@ -507,97 +528,52 @@ public class QuanLySinhVien extends javax.swing.JPanel {
                         JOptionPane.ERROR_MESSAGE);
             }
         }
-        loadDanhSach();
-
-
     }
 
+    //Ham xu ly khi nguoi dung nhan vao luu
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) throws ParseException {
         StringBuilder sb = new StringBuilder();
         SinhvienEntity sinhVien = SinhVienDAO.getThongTinSV(txtMa.getText());
-        if(sinhVien!=null){
+        if (sinhVien != null) {
             sb.append("Cập nhật thông tin không thành công");
-        getData(sinhVien);
-        int kq = SinhVienDAO.updateThongTinSV(sinhVien);
-        if (kq == 1) {
-            JOptionPane.showMessageDialog(this, "Chỉnh sửa thành công");
-            LophocEntity lopHoc = LopHocDAO.getThongTinLH(box.getItemAt(box.getSelectedIndex()));
-            LopHocDAO.SuaSV(lopHoc, box1.getItemAt(box1.getSelectedIndex()));
-        }
-        else{
-            JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
-                    JOptionPane.ERROR_MESSAGE);
-        }}
-        else{
+            getData(sinhVien);
+            int kq = SinhVienDAO.updateThongTinSV(sinhVien);
+            if (kq == 1) {
+                JOptionPane.showMessageDialog(this, "Chỉnh sửa thành công");
+                LophocEntity lopHoc = LopHocDAO.getThongTinLH(box.getItemAt(box.getSelectedIndex()));
+                loadDanhSach();
+            } else {
+                JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
             sb.append("Sinh viên không tồn tại trong danh sách nên không thực hiện chỉnh sửa thông tin.");
         }
-        loadDanhSach();
-
     }
 
+    //Ham xu ly khi nguoi dung nhan vao xoa
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {
         int kq = SinhVienDAO.deleteSV(txtMa.getText());
         StringBuilder sb = new StringBuilder();
         sb.append("Xoá sinh viên không thành công");
-        if(kq == 1){
+        if (kq == 1) {
             JOptionPane.showMessageDialog(this, "Xoá thành công");
             LophocEntity lopHoc = LopHocDAO.getThongTinLH(box.getItemAt(box.getSelectedIndex()));
-            LopHocDAO.XoaSV(lopHoc, box1.getItemAt(box1.getSelectedIndex()));
-        }
-        else{
+            loadDanhSach();
+        } else {
             JOptionPane.showMessageDialog(this, sb.toString(), "Invalidation",
                     JOptionPane.ERROR_MESSAGE);
         }
-        loadDanhSach();
 
     }
 
-    private void box1ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
+    //Ham xu ly khi nguoi dung nhan vao bang danh sach
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) throws ParseException {
         String username = this.jTable2.getValueAt(this.jTable2.getSelectedRow(), 0).toString();
         SinhvienEntity sinhVien = SinhVienDAO.getThongTinSV(username);
         setData(sinhVien);
     }
 
-
-    // Variables declaration - do not modify
-    private javax.swing.JComboBox<String> box;
-    private javax.swing.JComboBox<String> box1;
-    private javax.swing.JButton btnLuu;
-    private javax.swing.JButton btnThem;
-    private javax.swing.JButton btnXoa;
-    private javax.swing.JButton jButtonSearch;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextFieldSearch;
-    private javax.swing.JTextField txtCMND;
-    private javax.swing.JTextField txtDiaChi;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtMa;
-    private javax.swing.JTextField txtNgaySinh;
-    private javax.swing.JTextField txtTen;
-    // End of variables declaration
 }
 
 

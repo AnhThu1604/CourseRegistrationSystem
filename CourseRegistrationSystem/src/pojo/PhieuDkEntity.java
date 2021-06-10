@@ -1,50 +1,46 @@
 package pojo;
 
-import java.util.Objects;
-
 public class PhieuDkEntity {
-    private String maSv;
-    private String maHocPhan;
+    private int maPhieu;
+    private SinhvienEntity sinhVien;
+    private HocphanEntity hocPhan;
 
-    public PhieuDkEntity(){
+    public PhieuDkEntity() {
 
     }
 
-    public PhieuDkEntity(String maSv){
-        this.maSv = maSv;
+    public PhieuDkEntity(int maPhieu) {
+        this.maPhieu = maPhieu;
     }
 
-    public PhieuDkEntity(String maSv, String maHocPhan){
-        this.maSv = maSv;
-        this.maHocPhan = maHocPhan;
+    public PhieuDkEntity(SinhvienEntity sv, HocphanEntity hp) {
+        this.sinhVien = sv;
+        this.hocPhan = hp;
     }
 
-    public String getMaSv() {
-        return maSv;
+    public int getMaPhieu() {
+        return maPhieu;
     }
 
-    public void setMaSv(String maSv) {
-        this.maSv = maSv;
+    public void setMaPhieu(int maPhieu) {
+        this.maPhieu = maPhieu;
     }
 
-    public String getMaHocPhan() {
-        return maHocPhan;
+    public SinhvienEntity getSinhVien() {
+        return sinhVien;
     }
 
-    public void setMaHocPhan(String maHocPhan) {
-        this.maHocPhan = maHocPhan;
+    public void setSinhVien(SinhvienEntity sinhVien) {
+        this.sinhVien = sinhVien;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PhieuDkEntity that = (PhieuDkEntity) o;
-        return Objects.equals(maSv, that.maSv) && Objects.equals(maHocPhan, that.maHocPhan);
+    public HocphanEntity getHocPhan() {
+        return hocPhan;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(maSv, maHocPhan);
+    public void setHocPhan(HocphanEntity hocPhan) {
+        this.hocPhan = hocPhan;
     }
+
+
 }

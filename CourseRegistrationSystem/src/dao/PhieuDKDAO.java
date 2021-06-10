@@ -9,14 +9,16 @@ import util.HibernateUtil;
 
 import javax.persistence.Query;
 import java.util.List;
+
 public class PhieuDKDAO {
 
-    public static List<PhieuDkEntity> getDanhSachPhieu(){
+    /*----------------------Tham khao file huong dan-----------------------*/
+    public static List<PhieuDkEntity> getDanhSachPhieu() {
         List<PhieuDkEntity> ds = null;
-        SessionFactory factory= HibernateUtil.getSessionFactory();
-        Session session=factory.openSession();
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
         try {
-            String hql = "select Phieu from SinhvienEntity Phieu";
+            String hql = "select Phieu from PhieuDkEntity Phieu";
             Query query = session.createQuery(hql);
             ds = (List<PhieuDkEntity>) ((org.hibernate.query.Query<?>) query).list();
         } catch (HibernateException ex) {
@@ -29,26 +31,34 @@ public class PhieuDKDAO {
         return ds;
     }
 
-    public static List<PhieuDkEntity> getThongTinPhieu(String maSV){
-        List<PhieuDkEntity> Phieu = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        try{
-            Phieu = (List<PhieuDkEntity>)session.get(PhieuDkEntity.class, maSV);
-
-        }
-        catch (HibernateException ex){
+    public static List<PhieuDkEntity> getThongTinPhieu(String maSV) {
+        PhieuDkEntity phieu = null;
+        List<PhieuDkEntity> list = null;
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+        try {
+            String hql = "select phieu from PhieuDkEntity phieu where phieu.sinhVien.maSinhVien like :maSV";
+            Query query = session.createQuery(hql);
+            list = (List<PhieuDkEntity>) ((org.hibernate.query.Query<?>) query).list();
+        } catch (HibernateException ex) {
+            //Log the exception
             System.err.println(ex);
-        }finally {
+        } finally {
             session.close();
         }
-        return Phieu;
+        return list;
     }
 
     public static int addPhieu(PhieuDkEntity Phieu) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        if ((PhieuDKDAO.getThongTinPhieu(Phieu.getMaSv()) != null) && (PhieuDKDAO.getThongTinPhieu(Phieu.getMaHocPhan()) != null))
-        {
-            return 0;
+        List<PhieuDkEntity> list = PhieuDKDAO.getThongTinPhieu(Phieu.getSinhVien().getMaSinhVien());
+        if ((PhieuDKDAO.getThongTinPhieu(Phieu.getSinhVien().getMaSinhVien()) != null)) {
+            for (PhieuDkEntity phieuDK : list) {
+                if (phieuDK.getHocPhan().getMaHocPhan().compareTo(Phieu.getHocPhan().getMaHocPhan()) == 0) {
+                    return 0;
+                }
+            }
+
         }
         Transaction transaction = null;
         try {
@@ -66,7 +76,8 @@ public class PhieuDKDAO {
 
     public static int updateThongTinPhieu(PhieuDkEntity Phieu) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        if ((PhieuDKDAO.getThongTinPhieu(Phieu.getMaSv()) != null) && (PhieuDKDAO.getThongTinPhieu(Phieu.getMaHocPhan()) != null)) {
+        if ((PhieuDKDAO.getThongTinPhieu(Phieu.getSinhVien().getMaSinhVien()) != null) &&
+                (PhieuDKDAO.getThongTinPhieu(Phieu.getHocPhan().getMaHocPhan()) != null)) {
             return 0;
         }
         Transaction transaction = null;
@@ -86,7 +97,7 @@ public class PhieuDKDAO {
 
     public static int deletePhieu(PhieuDkEntity Phieu) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        if(Phieu == null){
+        if (Phieu == null) {
             return 0;
         }
         Transaction transaction = null;
@@ -102,4 +113,6 @@ public class PhieuDKDAO {
         }
         return 1;
     }
+
+    /*----------------------------------------------------------------------*/
 }

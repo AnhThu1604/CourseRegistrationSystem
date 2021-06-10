@@ -9,12 +9,14 @@ import util.HibernateUtil;
 
 import javax.persistence.Query;
 import java.util.List;
+
 public class GiaoVuDAO {
 
-    public static List<GiaovuEntity> getDanhSachGV(){
-        List<GiaovuEntity> ds=null;
-        SessionFactory factory= HibernateUtil.getSessionFactory();
-        Session session=factory.openSession();
+    /*----------------------Tham khao file huong dan-----------------------*/
+    public static List<GiaovuEntity> getDanhSachGV() {
+        List<GiaovuEntity> ds = null;
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
         try {
             String hql = "select gv from GiaovuEntity gv";
             Query query = session.createQuery(hql);
@@ -29,16 +31,15 @@ public class GiaoVuDAO {
         return ds;
     }
 
-    public static GiaovuEntity getThongTinGV(String ma){
+    public static GiaovuEntity getThongTinGV(String ma) {
         GiaovuEntity gv = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        try{
+        try {
             gv = (GiaovuEntity) session.get(GiaovuEntity.class, ma);
 
-        }
-        catch (HibernateException ex){
+        } catch (HibernateException ex) {
             System.err.println(ex);
-        }finally {
+        } finally {
             session.close();
         }
         return gv;
@@ -86,7 +87,7 @@ public class GiaoVuDAO {
     public static int deleteGV(String ma) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         GiaovuEntity sv = GiaoVuDAO.getThongTinGV(ma);
-        if(sv == null){
+        if (sv == null) {
             return 0;
         }
         Transaction transaction = null;
@@ -102,14 +103,15 @@ public class GiaoVuDAO {
         }
         return 1;
     }
+    /*---------------------------------------------------------------------*/
 
-    public static GiaovuEntity xacThucTK (String ma, String mk){
+    //Ham tra ve tai khoan giao dang nhap vao he thong
+    public static GiaovuEntity xacThucTK(String ma, String mk) {
         GiaovuEntity giaoVu = getThongTinGV(ma);
-        if(giaoVu == null || giaoVu.getMatKhau() == null)
-        {
+        if (giaoVu == null || giaoVu.getMatKhau() == null) {
             return null;
         }
-        if(giaoVu.getMatKhau().equals(mk) == true){
+        if (giaoVu.getMatKhau().equals(mk) == true) {
             return giaoVu;
         }
         return null;

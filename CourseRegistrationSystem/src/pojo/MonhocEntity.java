@@ -11,18 +11,18 @@ public class MonhocEntity {
     private HockiEntity hocKi;
     private Set<HocphanEntity> hocphans = new HashSet<HocphanEntity>(0);
 
-    public MonhocEntity(){
+    public MonhocEntity() {
 
     }
 
-    public MonhocEntity(String maMonHoc){
+    public MonhocEntity(String maMonHoc) {
         this.maMonHoc = maMonHoc;
     }
 
-    public MonhocEntity(String maMonHoc, String tenMonHoc, Integer soTinChi){
+    public MonhocEntity(String maMonHoc, String tenMonHoc, Integer soTinChi) {
         this.maMonHoc = maMonHoc;
         this.tenMonHoc = tenMonHoc;
-        this. soTinChi = soTinChi;
+        this.soTinChi = soTinChi;
     }
 
     public String getMaMonHoc() {
@@ -48,7 +48,6 @@ public class MonhocEntity {
     public void setSoTinChi(Integer soTinChi) {
         this.soTinChi = soTinChi;
     }
-
 
     public HockiEntity getHocKi() {
         return hocKi;

@@ -1,10 +1,7 @@
-
 package view;
 
 import bean.DanhMuc;
 import controller.ChuyenManHinhGV;
-import dao.GiaoVuDAO;
-import pojo.GiaovuEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +9,30 @@ import java.util.List;
 
 public class GiaoVu extends javax.swing.JFrame {
 
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel jlbDKHP;
+    private javax.swing.JLabel jlbDangXuat;
+    private javax.swing.JLabel jlbDoiMK;
+    private javax.swing.JLabel jlbGiaoVu;
+    private javax.swing.JLabel jlbHocKi;
+    private javax.swing.JLabel jlbHocPhan;
+    private javax.swing.JLabel jlbLopHoc;
+    private javax.swing.JLabel jlbMonHoc;
+    private javax.swing.JLabel jlbSinhVien;
+    private javax.swing.JLabel jlbThongTin;
+    private javax.swing.JPanel jpnDKHP;
+    private javax.swing.JPanel jpnDangXuat;
+    private javax.swing.JPanel jpnDoiMK;
+    private javax.swing.JPanel jpnGiaoVu;
+    private javax.swing.JPanel jpnHocKi;
+    private javax.swing.JPanel jpnHocPhan;
+    private javax.swing.JPanel jpnLopHoc;
+    private javax.swing.JPanel jpnMonHoc;
+    private javax.swing.JPanel jpnSinhVien;
+    private javax.swing.JPanel jpnThongTin;
+    private javax.swing.JPanel jpnView;
 
     public GiaoVu() {
         initComponents();
@@ -21,24 +42,23 @@ public class GiaoVu extends javax.swing.JFrame {
 
         controller.setView(jpnThongTin, jlbThongTin, "jpnThongTin");
         List<DanhMuc> list = new ArrayList<>();
-        list.add(new DanhMuc("jpnThongTin",jpnThongTin, jlbThongTin ));
-        list.add(new DanhMuc("jpnSinhVien",jpnSinhVien, jlbSinhVien ));
-        list.add(new DanhMuc("jpnGiaoVu",jpnGiaoVu, jlbGiaoVu ));
-        list.add(new DanhMuc("jpnMonHoc",jpnMonHoc, jlbMonHoc ));
+        list.add(new DanhMuc("jpnThongTin", jpnThongTin, jlbThongTin));
+        list.add(new DanhMuc("jpnSinhVien", jpnSinhVien, jlbSinhVien));
+        list.add(new DanhMuc("jpnGiaoVu", jpnGiaoVu, jlbGiaoVu));
+        list.add(new DanhMuc("jpnMonHoc", jpnMonHoc, jlbMonHoc));
         list.add(new DanhMuc("jpnHocPhan", jpnHocPhan, jlbHocPhan));
-        list.add(new DanhMuc("jpnHocKi",jpnHocKi, jlbHocKi));
-        list.add(new DanhMuc("jpnLopHoc",jpnLopHoc, jlbLopHoc));
-        list.add(new DanhMuc("jpnDKHP",jpnDKHP, jlbDKHP));
+        list.add(new DanhMuc("jpnHocKi", jpnHocKi, jlbHocKi));
+        list.add(new DanhMuc("jpnLopHoc", jpnLopHoc, jlbLopHoc));
+        list.add(new DanhMuc("jpnDKHP", jpnDKHP, jlbDKHP));
 
 
-        list.add(new DanhMuc("jpnDoiMK",jpnDoiMK, jlbDoiMK ));
-        list.add(new DanhMuc("jpnDangXuat",jpnDangXuat, jlbDangXuat ));
+        list.add(new DanhMuc("jpnDoiMK", jpnDoiMK, jlbDoiMK));
+        list.add(new DanhMuc("jpnDangXuat", jpnDangXuat, jlbDangXuat));
         controller.setEvent(list);
     }
 
-
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">
+
     private void initComponents() {
 
         jpnView = new javax.swing.JPanel();
@@ -384,36 +404,6 @@ public class GiaoVu extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>
+    }
 
-
-
-
-
-    // Variables declaration - do not modify
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel jlbDKHP;
-    private javax.swing.JLabel jlbDangXuat;
-    private javax.swing.JLabel jlbDoiMK;
-    private javax.swing.JLabel jlbGiaoVu;
-    private javax.swing.JLabel jlbHocKi;
-    private javax.swing.JLabel jlbHocPhan;
-    private javax.swing.JLabel jlbLopHoc;
-    private javax.swing.JLabel jlbMonHoc;
-    private javax.swing.JLabel jlbSinhVien;
-    private javax.swing.JLabel jlbThongTin;
-    private javax.swing.JPanel jpnDKHP;
-    private javax.swing.JPanel jpnDangXuat;
-    private javax.swing.JPanel jpnDoiMK;
-    private javax.swing.JPanel jpnGiaoVu;
-    private javax.swing.JPanel jpnHocKi;
-    private javax.swing.JPanel jpnHocPhan;
-    private javax.swing.JPanel jpnLopHoc;
-    private javax.swing.JPanel jpnMonHoc;
-    private javax.swing.JPanel jpnSinhVien;
-    private javax.swing.JPanel jpnThongTin;
-    private javax.swing.JPanel jpnView;
-    // End of variables declaration
 }

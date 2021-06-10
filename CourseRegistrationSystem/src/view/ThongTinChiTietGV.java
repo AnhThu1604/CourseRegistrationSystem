@@ -7,42 +7,58 @@ package view;
 
 
 import dao.GiaoVuDAO;
-import dao.SinhVienDAO;
 import pojo.GiaovuEntity;
-import pojo.SinhvienEntity;
 
 import javax.swing.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class ThongTinChiTietGV extends javax.swing.JPanel {
     String ma = DangNhap.getUsername();
     GiaovuEntity giaoVu = GiaoVuDAO.getThongTinGV(ma);
 
+    private javax.swing.JButton btnLuu;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextField txtCMND;
+    private javax.swing.JTextField txtDiaChi;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtMa;
+    private javax.swing.JTextField txtMatKhau;
+    private javax.swing.JTextField txtNgaySinh;
+    private javax.swing.JTextField txtTen;
+
     public ThongTinChiTietGV() {
         initComponents();
+        //Set thong tin giang vien len form
         txtMa.setText(ma);
         txtTen.setText(giaoVu.getHoVaTen());
         txtNgaySinh.setText(giaoVu.getNgaySinh().toString());
         txtDiaChi.setText(giaoVu.getDiaChi());
         txtCMND.setText(giaoVu.getCmnd());
 
-        if(giaoVu.getPhai().compareTo("Nam") == 0){
+        if (giaoVu.getPhai().compareTo("Nam") == 0) {
             jComboBox1.setSelectedIndex(0);
         }
 
-        if(giaoVu.getPhai().compareTo("Nữ") == 0) {
+        if (giaoVu.getPhai().compareTo("Nữ") == 0) {
             jComboBox1.setSelectedIndex(1);
         }
         txtEmail.setText(giaoVu.getEmail());
 
     }
 
-
-
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">
+
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
@@ -95,7 +111,7 @@ public class ThongTinChiTietGV extends javax.swing.JPanel {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Nam", "Nữ"}));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -182,16 +198,16 @@ public class ThongTinChiTietGV extends javax.swing.JPanel {
                                 .addComponent(btnLuu)
                                 .addContainerGap(52, Short.MAX_VALUE))
         );
-    }// </editor-fold>
+    }
 
-
-
+    //Ham xu ly khi nguoi dung nhan luu
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) throws ParseException {
         giaoVu.setHoVaTen(txtTen.getText());
+        //Lay thong tin tu form
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String date;
         date = txtNgaySinh.getText();
-        if(date.compareTo("") == 0) {
+        if (date.compareTo("") == 0) {
             date = "0000-00-00";
         }
         giaoVu.setNgaySinh(format.parse(date));
@@ -200,34 +216,11 @@ public class ThongTinChiTietGV extends javax.swing.JPanel {
         giaoVu.setEmail(txtEmail.getText());
         System.out.println(jComboBox1.getSelectedIndex());
         System.out.println(jComboBox1.getItemAt(jComboBox1.getSelectedIndex()));
-
         giaoVu.setPhai(jComboBox1.getItemAt(jComboBox1.getSelectedIndex()).toString());
         int kq = GiaoVuDAO.updateThongTinGV(giaoVu);
-        if (kq == 1){
+        if (kq == 1) {
             JOptionPane.showMessageDialog(this, "Chỉnh sửa thành công");
         }
     }
-
-
-    // Variables declaration - do not modify
-    private javax.swing.JButton btnLuu;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField txtCMND;
-    private javax.swing.JTextField txtDiaChi;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtMa;
-    private javax.swing.JTextField txtMatKhau;
-    private javax.swing.JTextField txtNgaySinh;
-    private javax.swing.JTextField txtTen;
     // End of variables declaration
 }

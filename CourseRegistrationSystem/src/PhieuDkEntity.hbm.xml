@@ -1,17 +1,21 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-mapping PUBLIC
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-
     <class name="pojo.PhieuDkEntity" table="phieuDK" schema="CourseRegistrationSystem">
-        <composite-id mapped="true" class="pojo.PhieuDkEntityPK">
-            <key-property name="maSv">
-                <column name="MaSV" sql-type="varchar(50)" length="50"/>
-            </key-property>
-            <key-property name="maHocPhan">
-                <column name="MaHocPhan" sql-type="varchar(30)" length="30"/>
-            </key-property>
-        </composite-id>
+        <id name="maPhieu">
+            <column name="MaPhieu" sql-type="varchar(30)" length="30"/>
+        </id>
+        <many-to-one name="sinhVien" class="pojo.SinhvienEntity"
+                     fetch="select" lazy="false">
+            <column name="MaSV" length="45"/>
+        </many-to-one>
+        <many-to-one name="hocPhan" class="pojo.HocphanEntity"
+                     fetch="select" lazy="false">
+            <column name="MaHocPhan" length="45"/>
+        </many-to-one>
     </class>
 </hibernate-mapping>
+
+

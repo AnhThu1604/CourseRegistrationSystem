@@ -4,21 +4,19 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import pojo.DangkiHpEntity;
 import pojo.HockiEntity;
-import pojo.HocphanEntity;
-import pojo.MonhocEntity;
 import util.HibernateUtil;
 
 import javax.persistence.Query;
-import java.util.Iterator;
 import java.util.List;
+
 public class HocKiDAO {
 
-    public static List<HockiEntity> getDanhSachHK(){
+    /*----------------------Tham khao file huong dan-----------------------*/
+    public static List<HockiEntity> getDanhSachHK() {
         List<HockiEntity> ds = null;
-        SessionFactory factory= HibernateUtil.getSessionFactory();
-        Session session=factory.openSession();
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
         try {
             String hql = "select HK from HockiEntity HK";
             Query query = session.createQuery(hql);
@@ -33,16 +31,15 @@ public class HocKiDAO {
         return ds;
     }
 
-    public static HockiEntity getThongTinHK(int maHocki){
+    public static HockiEntity getThongTinHK(int maHocki) {
         HockiEntity HK = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        try{
+        try {
             HK = (HockiEntity) session.get(HockiEntity.class, maHocki);
 
-        }
-        catch (HibernateException ex){
+        } catch (HibernateException ex) {
             System.err.println(ex);
-        }finally {
+        } finally {
             session.close();
         }
         return HK;
@@ -90,7 +87,7 @@ public class HocKiDAO {
     public static int deleteHK(int maHocki) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         HockiEntity HK = HocKiDAO.getThongTinHK(maHocki);
-        if(HK == null){
+        if (HK == null) {
             return 0;
         }
         Transaction transaction = null;
@@ -106,6 +103,7 @@ public class HocKiDAO {
         }
         return 1;
     }
+    /*---------------------------------------------------------------------*/
 
     //Lay thong tin ki hien tai
     public static HockiEntity getThongTinHKHT() {
@@ -123,7 +121,7 @@ public class HocKiDAO {
         } finally {
             session.close();
         }
-        if(list.size()==0) {
+        if (list.size() == 0) {
             return null;
         }
         HK = list.get(0);

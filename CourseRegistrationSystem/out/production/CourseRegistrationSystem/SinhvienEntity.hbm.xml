@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-mapping PUBLIC
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
     <class name="pojo.SinhvienEntity" table="sinhvien" schema="CourseRegistrationSystem">
@@ -12,22 +12,22 @@
             <column name="HoVaTen" sql-type="varchar(50)" length="50" not-null="true"/>
         </property>
         <property name="ngaySinh">
-            <column name="NgaySinh" sql-type="date" />
+            <column name="NgaySinh" sql-type="date"/>
         </property>
         <property name="phai">
-            <column name="Phai" sql-type="varchar(5)" length="5" />
+            <column name="Phai" sql-type="varchar(5)" length="5"/>
         </property>
         <property name="diaChi">
-            <column name="DiaChi" sql-type="varchar(255)" />
+            <column name="DiaChi" sql-type="varchar(255)"/>
         </property>
         <property name="cmnd">
-            <column name="CMND" sql-type="varchar(12)" length="12" />
+            <column name="CMND" sql-type="varchar(12)" length="12"/>
         </property>
         <property name="matKhau">
-            <column name="MatKhau" sql-type="varchar(50)" length="50" />
+            <column name="MatKhau" sql-type="varchar(50)" length="50"/>
         </property>
         <property name="email">
-            <column name="Email" sql-type="varchar(50)" length="50" />
+            <column name="Email" sql-type="varchar(50)" length="50"/>
         </property>
         <property name="maQuyenDn">
             <column name="MaQuyenDN" sql-type="int"/>
@@ -36,6 +36,13 @@
                      fetch="select" lazy="false">
             <column name="Lop" length="45"/>
         </many-to-one>
+        <set name="phieus" inverse="true" lazy="false" fetch="join">
+            <key>
+                <column name="MaSV" length="20" not-null="true"/>
+            </key>
+            <one-to-many class="pojo.PhieuDkEntity"/>
+        </set>
+
 
     </class>
 </hibernate-mapping>

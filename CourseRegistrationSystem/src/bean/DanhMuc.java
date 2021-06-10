@@ -1,26 +1,23 @@
-
 package bean;
+
 import javax.swing.*;
 
-
+/*-----------------------------Tham khao code tren mang------------------------------*/
 public class DanhMuc {
     private String kind;
     private JPanel panel;
     private JLabel label;
-    
-    
-  
-    public DanhMuc(){
-        
+
+    public DanhMuc() {
+
     }
-    
-    public DanhMuc(String kind, JPanel panel, JLabel label)
-    {
+
+    public DanhMuc(String kind, JPanel panel, JLabel label) {
         this.kind = kind;
         this.panel = panel;
         this.label = label;
     }
-    
+
     public String getKind() {
         return kind;
     }
@@ -44,7 +41,7 @@ public class DanhMuc {
     public void setLabel(JLabel label) {
         this.label = label;
     }
-    
-  
-    
+
 }
+
+/*-------------------------------------------------------------------------------------*/

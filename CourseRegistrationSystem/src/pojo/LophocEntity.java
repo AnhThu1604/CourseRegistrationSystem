@@ -9,29 +9,30 @@ public class LophocEntity {
     private Integer tongSv;
     private Integer tongSvNam;
     private Integer tongSvNu;
-    private Set<SinhvienEntity> list = new HashSet<SinhvienEntity>(0);
+    private Set<SinhvienEntity> sinhViens = new HashSet<SinhvienEntity>(0);
 
-    public Set<SinhvienEntity> getList() {
-        return list;
-    }
-
-    public void setList(Set<SinhvienEntity> list) {
-        this.list = list;
-    }
-
-    public LophocEntity(){
+    public LophocEntity() {
 
     }
 
-    public LophocEntity(String maLopHoc){
+    public LophocEntity(String maLopHoc) {
         this.maLopHoc = maLopHoc;
     }
 
-    public LophocEntity(String maLopHoc, Integer tongSv, Integer tongSvNam, Integer tongSvNu){
+
+    public LophocEntity(String maLopHoc, Integer tongSv, Integer tongSvNam, Integer tongSvNu) {
         this.maLopHoc = maLopHoc;
         this.tongSv = tongSv;
         this.tongSvNam = tongSvNam;
         this.tongSvNu = tongSvNu;
+    }
+
+    public Set<SinhvienEntity> getSinhViens() {
+        return sinhViens;
+    }
+
+    public void setSinhViens(Set<SinhvienEntity> sinhViens) {
+        this.sinhViens = sinhViens;
     }
 
     public String getMaLopHoc() {
