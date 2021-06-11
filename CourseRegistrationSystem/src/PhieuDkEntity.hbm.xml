@@ -7,6 +7,7 @@
         <id name="maPhieu">
             <column name="MaPhieu" sql-type="varchar(30)" length="30"/>
         </id>
+        <!-- Tham khao code tren mang -->
         <many-to-one name="sinhVien" class="pojo.SinhvienEntity"
                      fetch="select" lazy="false">
             <column name="MaSV" length="45"/>

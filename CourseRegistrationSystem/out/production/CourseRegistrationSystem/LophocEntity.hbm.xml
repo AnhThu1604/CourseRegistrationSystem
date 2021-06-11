@@ -17,6 +17,7 @@
         <property name="tongSvNu">
             <column name="TongSVNu" sql-type="int"/>
         </property>
+        <!-- Tham khao code tren mang -->
         <set name="sinhViens" inverse="true" lazy="false" fetch="join">
             <key>
                 <column name="Lop" length="10" not-null="true"></column>

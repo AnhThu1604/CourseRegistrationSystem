@@ -32,6 +32,7 @@
         <property name="maQuyenDn">
             <column name="MaQuyenDN" sql-type="int"/>
         </property>
+        <!-- Tham khao code tren mang -->
         <many-to-one name="lop" class="pojo.LophocEntity"
                      fetch="select" lazy="false">
             <column name="Lop" length="45"/>

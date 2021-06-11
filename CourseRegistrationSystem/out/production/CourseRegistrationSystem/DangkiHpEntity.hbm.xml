@@ -14,6 +14,7 @@
         <property name="ngayKetThuc">
             <column name="NgayKetThuc" sql-type="date" not-null="true"/>
         </property>
+        <!-- Tham khao code tren mang -->
         <many-to-one name="hocKi" class="pojo.HockiEntity"
                      fetch="select" lazy="false">
             <column name="MaHocKi" length="45"/>

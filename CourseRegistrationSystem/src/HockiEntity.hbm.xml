@@ -23,6 +23,7 @@
         <property name="kiHienTai">
             <column name="KiHienTai" sql-type="int"/>
         </property>
+        <!-- Tham khao code tren mang -->
         <set inverse="true" name="mons" fetch="join" lazy="false">
             <key>
                 <column name="MaHocKi" not-null="true"/>

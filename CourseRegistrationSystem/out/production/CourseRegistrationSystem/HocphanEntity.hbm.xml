@@ -24,6 +24,7 @@
         <property name="slotToiDa">
             <column name="SlotToiDa" sql-type="int"/>
         </property>
+        <!-- Tham khao code tren mang -->
         <many-to-one name="monHoc" class="pojo.MonhocEntity"
                      fetch="select" lazy="false">
             <column name="MaMonHoc" length="45"/>

@@ -48,7 +48,7 @@ public class ThongTinChiTietSV extends javax.swing.JPanel {
         txtNgaySinh.setText(sinhVien.getNgaySinh().toString());
         txtDiaChi.setText(sinhVien.getDiaChi());
         txtCMND.setText(sinhVien.getCmnd());
-
+        txtLopHoc.setText(sinhVien.getLop().getMaLopHoc());
         if (sinhVien.getPhai().compareTo("Nam") == 0) {
             jComboBox1.setSelectedIndex(0);
         }

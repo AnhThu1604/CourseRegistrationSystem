@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
 
-
+/*-----------------------------Tham khao code tren mang------------------------------*/
 public class ChuyenManHinhGV {
     List<DanhMuc> listDanhMuc = null;
     private JPanel rootPanel;
@@ -210,3 +210,4 @@ public class ChuyenManHinhGV {
         }
     }
 }
+/*-----------------------------------------------------------------------------------*/

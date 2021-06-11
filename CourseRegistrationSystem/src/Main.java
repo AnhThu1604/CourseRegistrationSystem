@@ -1,8 +1,10 @@
 import view.DangNhap;
 
-public class Main {
-    public static void main(String[] args) {
+import java.io.*;
 
+public class Main {
+
+    public static void main(String[] args) throws FileNotFoundException {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
